@@ -2810,7 +2810,21 @@ export function saveImageErrorResult({
     model: `${provider}/${model}`,
     provider,
     duration: Date.now() - startTime,
-    error: typeof error === "string" ? error.slice(0, 500) : String(error).slice(0, 500),
+    error:
+      typeof error === "string"
+        ? error.slice(0, 500)
+        : (() => {
+            // `error` here is frequently a sanitizeUpstreamDetails() result, which
+            // returns Object.create(null) objects — String() throws on those
+            // ("Cannot convert object to primitive value") because they have no
+            // inherited toString(). JSON.stringify() handles null-prototype
+            // objects fine and gives a more useful log line than "[object Object]".
+            try {
+              return JSON.stringify(error ?? null).slice(0, 500);
+            } catch {
+              return "[unserializable error]";
+            }
+          })(),
     requestBody,
   }).catch(() => {});
 
