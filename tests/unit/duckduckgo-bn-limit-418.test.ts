@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-bn-limit-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
@@ -13,7 +14,7 @@ const { resetDbInstance } = await import("../../src/lib/db/core.ts");
 
 // Load real challenge from fixtures
 const FIXTURES = path.join(
-  path.dirname(new URL(import.meta.url).pathname),
+  path.dirname(fileURLToPath(import.meta.url)),
   "../fixtures/duckduckgo/challenge-variants.json"
 );
 const VARIANTS = JSON.parse(fs.readFileSync(FIXTURES, "utf8"));

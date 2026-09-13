@@ -5,12 +5,17 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 /**
- * GLM's translateSseResponse used to pass a 16th positional (65536) to
- * createSSETransformStreamWithLogger. The helper only has 15 parameters
- * (last is requestToolIdentityMap) — tsc reports TS2554 and the number
- * never reached TransformStream.
+ * GLM's translateSseResponse used to pass a 16th positional (a bare 65536
+ * literal) to createSSETransformStreamWithLogger back when the helper only
+ * had 15 parameters (last was requestToolIdentityMap) — tsc reported TS2554
+ * and the number never reached TransformStream.
  *
- * Guard the call site in source: no 65536, last arg is suppressThinkClose.
+ * The helper has since grown a legitimate 16th parameter, streamBufferBytes
+ * (open-sse/utils/stream.ts), and GLM now passes its own named
+ * GLM_STREAM_BUFFER_BYTES constant there — that is intentional, not a
+ * regression. Guard the call site in source for the original failure mode
+ * instead: no *raw numeric literal* positional after suppressThinkClose
+ * (only named identifiers/undefined are allowed there).
  */
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -46,6 +51,10 @@ test("GLM translateSseResponse does not pass a 16th positional to the stream hel
   const callAt = body.indexOf("createSSETransformStreamWithLogger(");
   assert.ok(callAt >= 0);
   const call = extractParens(body, callAt + "createSSETransformStreamWithLogger".length);
-  assert.equal(/65536/.test(call), false, `dead 16th arg still present:\n${call}`);
-  assert.match(call, /suppressThinkClose\s*\)\s*$/);
+  const afterSuppressThinkClose = call.slice(call.indexOf("suppressThinkClose"));
+  assert.doesNotMatch(
+    afterSuppressThinkClose,
+    /,\s*\d+\s*[,)]/,
+    `raw numeric literal positional after suppressThinkClose (dead-arg regression):\n${call}`
+  );
 });

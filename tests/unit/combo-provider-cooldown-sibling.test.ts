@@ -128,13 +128,16 @@ test("source guard: auth.ts skips model lockout for per-model-quota providers on
   );
 });
 
-test("source guard: combo.ts skips provider cooldown for per-model-quota on 500", () => {
+test("source guard: executeTargetAttempt.ts skips provider cooldown for per-model-quota on 500", () => {
+  // combo.ts's per-target dispatch/cooldown-recording logic was split out into
+  // open-sse/services/combo/executeTargetAttempt.ts during the v3.8.51 merge;
+  // the guard now lives there instead of in combo.ts itself.
   const src = fs.readFileSync(
-    path.join(process.cwd(), "open-sse", "services", "combo.ts"),
+    path.join(process.cwd(), "open-sse", "services", "combo", "executeTargetAttempt.ts"),
     "utf-8"
   );
   assert.ok(
     src.includes("hasPerModelQuota(provider, rawModel)") && src.includes("recordProviderCooldown"),
-    "combo.ts must skip provider cooldown recording for per-model-quota providers on 500"
+    "executeTargetAttempt.ts must skip provider cooldown recording for per-model-quota providers on 500"
   );
 });

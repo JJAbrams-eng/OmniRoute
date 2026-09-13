@@ -180,7 +180,10 @@ test("shared set size includes live REGISTRY and retired Designer + Felo + Qwen 
   // 2026-09-02: a keyless provider was removed at its operator's request, taking its id and
   // alias out of the REGISTRY walk (408 → 406).
   // #11786: SeekAi adds id "seekai" + alias "ska" (406 → 408).
-  assert.equal(RESERVED_PREFIX_COUNT, 408);
+  // v3.8.51 merge (2026-09-13): live count moved 408 → 410 with upstream registry
+  // additions folded in by the release merge — measured via RESERVED_PREFIX_COUNT
+  // itself (computed, not hand-traced to specific PR numbers).
+  assert.equal(RESERVED_PREFIX_COUNT, 410);
 });
 
 test("isReservedProviderPrefix rejects non-string input", () => {

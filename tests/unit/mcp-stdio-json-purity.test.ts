@@ -12,8 +12,9 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("../..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const ROOT = fileURLToPath(new URL("../..", import.meta.url));
 
 /**
  * Regression coverage: `omniroute --mcp` (the stdio transport Claude Desktop and other MCP

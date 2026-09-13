@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // #9156: macOS launchd autostart fails because the supervisor spawns the child
 // with bare "node", but launchd's PATH cannot resolve it. process.execPath is
@@ -14,13 +15,10 @@ import path from "node:path";
 //   2. Runtime test via mock.module (requires --experimental-test-module-mocks)
 //      that captures the actual spawn arguments.
 
-const __filename = new URL(import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SUPERVISOR_PATH = path.resolve(
-  __dirname,
-  "../../bin/cli/runtime/processSupervisor.mjs"
-);
+const SUPERVISOR_PATH = path.resolve(__dirname, "../../bin/cli/runtime/processSupervisor.mjs");
 const supervisorSrc = fs.readFileSync(SUPERVISOR_PATH, "utf8");
 
 // ---------------------------------------------------------------------------
@@ -47,10 +45,7 @@ test("process.execPath is an absolute path to the running Node.js binary", () =>
     path.isAbsolute(process.execPath),
     `process.execPath must be absolute, got: ${process.execPath}`
   );
-  assert.ok(
-    fs.existsSync(process.execPath),
-    `process.execPath must exist: ${process.execPath}`
-  );
+  assert.ok(fs.existsSync(process.execPath), `process.execPath must exist: ${process.execPath}`);
 });
 
 // ---------------------------------------------------------------------------
@@ -84,9 +79,7 @@ if (typeof mock.module === "function") {
 
     process.env.PORT = "0";
 
-    const { ServerSupervisor } = await import(
-      "../../bin/cli/runtime/processSupervisor.mjs"
-    );
+    const { ServerSupervisor } = await import("../../bin/cli/runtime/processSupervisor.mjs");
 
     const supervisor = new ServerSupervisor({
       serverPath: "/fake/server.js",
