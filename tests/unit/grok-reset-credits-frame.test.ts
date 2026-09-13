@@ -5,8 +5,14 @@ import {
   encodeRedeemResetRequest,
 } from "../../open-sse/services/grokResetCreditsFrame.ts";
 
-const GRANTED = 1786560540;
-const EXPIRES = 1789238940;
+// Computed relative to "now" (not a fixed epoch literal) so these fixtures never
+// rot into the past — a hardcoded absolute timestamp here previously made every
+// "unexpired"/"live" assertion in this file fail once real time caught up to it
+// (see tests/unit/grok-reset-credits-redeem.test.ts and
+// tests/unit/grok-reset-credits-connection.test.ts for the sibling fixtures with
+// the same failure mode).
+const GRANTED = Math.floor(Date.now() / 1000) - 3600; // 1 hour ago
+const EXPIRES = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days from now
 const TOKEN_ID = "test-token-id"; // 13 bytes
 
 function encodeVarint(value: number): Buffer {
@@ -170,7 +176,10 @@ test("live nested fields 10/20/30 are not malformed", () => {
 });
 
 test("live nested field-30 expiry still drops expired cards", () => {
-  const expired = encodeLengthDelimited(10, encodeLiveToken("test-token-ex", GRANTED, 1_700_000_000));
+  const expired = encodeLengthDelimited(
+    10,
+    encodeLiveToken("test-token-ex", GRANTED, 1_700_000_000)
+  );
   const live = encodeLengthDelimited(10, encodeLiveToken(TOKEN_ID, GRANTED, EXPIRES));
   const decoded = decodeGrokResetCreditsFrame(
     Buffer.concat([frameData(Buffer.concat([expired, live])), frameTrailer()])

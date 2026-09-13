@@ -17,8 +17,11 @@ const grokReset = await import("../../src/lib/usage/grokResetCredits.ts");
 const originalFetch = globalThis.fetch;
 const LIST_URL = "https://grok.com/prod_mc_billing.ConsumerUiSvc/GetRemainingResets";
 const REDEEM_URL = "https://grok.com/prod_mc_billing.ConsumerUiSvc/RedeemReset";
-const GRANTED = 1786560540;
-const EXPIRES = 1789238940;
+// Computed relative to "now" (not a fixed epoch literal) so this fixture never
+// rots into the past — see tests/unit/grok-reset-credits-frame.test.ts for the
+// full explanation (same root cause hit 4 test files at once).
+const GRANTED = Math.floor(Date.now() / 1000) - 3600; // 1 hour ago
+const EXPIRES = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days from now
 const TOKEN_ID = "test-token-id";
 
 function encodeVarint(value: number): Buffer {

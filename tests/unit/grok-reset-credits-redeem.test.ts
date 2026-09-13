@@ -7,8 +7,11 @@ import {
 } from "../../open-sse/services/grokResetCredits.ts";
 import { encodeRedeemResetRequest } from "../../open-sse/services/grokResetCreditsFrame.ts";
 
-const GRANTED = 1786560540;
-const EXPIRES = 1789238940;
+// Computed relative to "now" (not a fixed epoch literal) so this fixture never
+// rots into the past — see tests/unit/grok-reset-credits-frame.test.ts for the
+// full explanation (same root cause hit 4 test files at once).
+const GRANTED = Math.floor(Date.now() / 1000) - 3600; // 1 hour ago
+const EXPIRES = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days from now
 const TOKEN_ID = "test-token-id";
 const REDEEM_URL = "https://grok.com/prod_mc_billing.ConsumerUiSvc/RedeemReset";
 const LIST_URL = "https://grok.com/prod_mc_billing.ConsumerUiSvc/GetRemainingResets";
@@ -137,17 +140,21 @@ test("consumeGrokResetCredit posts RedeemReset with protobuf field 10 and skips 
 
 test("consumeGrokResetCredit picks the token that expires first when none is selected", async () => {
   const calls: Array<{ url: string; body: Buffer | null }> = [];
-  const outcome = await consumeGrokResetCredit("fixture-access-token", {}, async (url, init = {}) => {
-    const body = init.body ? Buffer.from(init.body as Buffer) : null;
-    calls.push({ url: String(url), body });
-    if (String(url) === LIST_URL) {
-      return listResponse([
-        { id: "test-token-bb", expires: EXPIRES + 86400 },
-        { id: "test-token-aa", expires: EXPIRES },
-      ]);
+  const outcome = await consumeGrokResetCredit(
+    "fixture-access-token",
+    {},
+    async (url, init = {}) => {
+      const body = init.body ? Buffer.from(init.body as Buffer) : null;
+      calls.push({ url: String(url), body });
+      if (String(url) === LIST_URL) {
+        return listResponse([
+          { id: "test-token-bb", expires: EXPIRES + 86400 },
+          { id: "test-token-aa", expires: EXPIRES },
+        ]);
+      }
+      return trailerResponse(0);
     }
-    return trailerResponse(0);
-  });
+  );
   assert.equal(outcome, "reset");
   const redeem = calls.find((call) => call.url === REDEEM_URL);
   assert.ok(redeem?.body);
@@ -159,17 +166,10 @@ test("consumeGrokResetCredit maps a missing selected token via RedeemReset grpc-
   const { GrokResetCreditError } = await import("../../open-sse/services/grokResetCredits.ts");
   await assert.rejects(
     () =>
-      consumeGrokResetCredit(
-        "fixture-access-token",
-        { tokenId: "missing-token" },
-        async (url) => {
-          if (String(url) === LIST_URL) return listResponse([{ id: TOKEN_ID, expires: EXPIRES }]);
-          return trailerResponse(
-            9,
-            "The token cannot be redeemed: it does not exist or is expired"
-          );
-        }
-      ),
+      consumeGrokResetCredit("fixture-access-token", { tokenId: "missing-token" }, async (url) => {
+        if (String(url) === LIST_URL) return listResponse([{ id: TOKEN_ID, expires: EXPIRES }]);
+        return trailerResponse(9, "The token cannot be redeemed: it does not exist or is expired");
+      }),
     (error: unknown) =>
       error instanceof GrokResetCreditError && error.status === 409 && error.code === "no_credit"
   );

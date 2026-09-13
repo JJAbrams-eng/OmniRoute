@@ -71,11 +71,17 @@ function encodeVarintField(fieldNumber: number, value: number): Buffer {
   return Buffer.concat([encodeTag(fieldNumber, 0), encodeVarint(value)]);
 }
 
+// Computed relative to "now" (not a fixed epoch literal) so these fixtures never
+// rot into the past — see tests/unit/grok-reset-credits-frame.test.ts for the
+// full explanation (same root cause hit 4 test files at once).
+const RESET_CREDIT_GRANTED = Math.floor(Date.now() / 1000) - 3600; // 1 hour ago
+const RESET_CREDIT_EXPIRES = Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60; // 30 days out
+
 function oneResetTokenResponse(): Response {
   const token = Buffer.concat([
     encodeLengthDelimited(1, Buffer.from("test-token-id", "utf8")),
-    encodeVarintField(2, 1786560540),
-    encodeVarintField(3, 1789238940),
+    encodeVarintField(2, RESET_CREDIT_GRANTED),
+    encodeVarintField(3, RESET_CREDIT_EXPIRES),
   ]);
   const payload = encodeLengthDelimited(10, token);
   const trailer = Buffer.from("grpc-status:0\r\n", "utf8");
@@ -90,8 +96,8 @@ function liveResetTokenResponse(): Response {
   const timestamp = (unixSeconds: number) => encodeVarintField(1, unixSeconds);
   const token = Buffer.concat([
     encodeLengthDelimited(10, Buffer.from("test-token-id", "utf8")),
-    encodeLengthDelimited(20, timestamp(1786560540)),
-    encodeLengthDelimited(30, timestamp(1789238940)),
+    encodeLengthDelimited(20, timestamp(RESET_CREDIT_GRANTED)),
+    encodeLengthDelimited(30, timestamp(RESET_CREDIT_EXPIRES)),
   ]);
   const payload = encodeLengthDelimited(10, token);
   const trailer = Buffer.from("grpc-status:0\r\n", "utf8");
