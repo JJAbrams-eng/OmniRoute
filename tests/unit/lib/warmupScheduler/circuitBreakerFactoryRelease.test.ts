@@ -14,6 +14,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import net from "node:net";
+import { parseRespCommands } from "./fakeRespServer.ts";
 
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-warmup-release-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
@@ -44,17 +45,26 @@ function startProbeRefusingRedis(): Promise<{
   return new Promise((resolve) => {
     let closed = false;
     const server = net.createServer((socket) => {
+      let pending = Buffer.alloc(0);
       socket.on("close", () => {
         closed = true;
       });
       socket.on("error", () => {});
       socket.on("data", (buf) => {
-        if (buf.toString().toLowerCase().includes("info")) {
-          const body = "redis_version:7.0.0\r\n";
-          socket.write(`$${body.length}\r\n${body}\r\n`);
-          return;
+        pending = Buffer.concat([pending, buf]);
+        const { commands, rest } = parseRespCommands(pending);
+        pending = rest;
+        // Reply once per parsed RESP command, not once per `data` event --
+        // see fakeRespServer.ts for why pipelined commands need this.
+        for (const args of commands) {
+          const cmd = (args[0] ?? "").toLowerCase();
+          if (cmd === "info") {
+            const body = "redis_version:7.0.0\r\n";
+            socket.write(`$${body.length}\r\n${body}\r\n`);
+            continue;
+          }
+          socket.write("-ERR probe refused\r\n");
         }
-        socket.write("-ERR probe refused\r\n");
       });
     });
     server.listen(0, "127.0.0.1", () => {

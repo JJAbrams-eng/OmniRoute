@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-combo-quota-protected-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
@@ -193,7 +194,7 @@ test("DELETE /api/combos/[id] returns 404 when combo does not exist", async () =
 
 test("combos page source filters isHidden from rendered list", async () => {
   const pageSource = fs.readFileSync(
-    new URL("../../src/app/(dashboard)/dashboard/combos/page.tsx", import.meta.url).pathname,
+    fileURLToPath(new URL("../../src/app/(dashboard)/dashboard/combos/page.tsx", import.meta.url)),
     "utf8"
   );
   assert.ok(

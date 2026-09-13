@@ -11,6 +11,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import net from "node:net";
+import { parseRespCommands } from "./fakeRespServer.ts";
 
 const TEST_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-warmup-factory-"));
 process.env.DATA_DIR = TEST_DATA_DIR;
@@ -53,18 +54,28 @@ test("REDIS_URL unset → SqliteCircuitBreakerStore", async () => {
 function startFlakyRedis(): Promise<{ port: number; close: () => void }> {
   return new Promise((resolve) => {
     const server = net.createServer((socket) => {
+      let pending = Buffer.alloc(0);
       socket.on("data", (buf) => {
-        const cmd = buf.toString().toLowerCase();
-        if (cmd.includes("hgetall") || cmd.includes("hset") || cmd.includes("hget")) {
-          socket.destroy(); // the outage: connection drops mid-command
-          return;
+        pending = Buffer.concat([pending, buf]);
+        const { commands, rest } = parseRespCommands(pending);
+        pending = rest;
+        // Reply exactly once per parsed RESP command -- ioredis may pipeline
+        // several commands (e.g. CLIENT SETINFO x2 + INFO) into one TCP
+        // packet, and replying once per `data` event instead would leave
+        // queued commands without a matching reply, hanging the client.
+        for (const args of commands) {
+          const cmd = (args[0] ?? "").toLowerCase();
+          if (cmd === "hgetall" || cmd === "hset" || cmd === "hget") {
+            socket.destroy(); // the outage: connection drops mid-command
+            return;
+          }
+          if (cmd === "info") {
+            const body = "redis_version:7.0.0\r\n";
+            socket.write(`$${body.length}\r\n${body}\r\n`);
+            continue;
+          }
+          socket.write("+PONG\r\n");
         }
-        if (cmd.includes("info")) {
-          const body = "redis_version:7.0.0\r\n";
-          socket.write(`$${body.length}\r\n${body}\r\n`);
-          return;
-        }
-        socket.write("+PONG\r\n");
       });
       socket.on("error", () => {});
     });

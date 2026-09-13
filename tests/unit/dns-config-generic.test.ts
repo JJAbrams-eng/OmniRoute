@@ -12,6 +12,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // ---------------------------------------------------------------------------
 // Inline mock for systemCommands — must happen before importing dnsConfig.
@@ -221,7 +222,7 @@ test("removeDNSEntries: skips hosts NOT in /etc/hosts (idempotency)", async () =
 test("addDNSEntries: calls exec with array-form args (Hard Rule #13 pattern)", async () => {
   // We cannot fully mock execFile in ESM without experimental flags, so we
   // verify structural compliance by inspecting the source file directly.
-  const srcPath = new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url).pathname;
+  const srcPath = fileURLToPath(new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url));
   const src = fs.readFileSync(srcPath, "utf8");
 
   // The tee invocation must use array form: args array contains HOSTS_FILE as
@@ -240,7 +241,7 @@ test("addDNSEntries: calls exec with array-form args (Hard Rule #13 pattern)", a
 });
 
 test("addDNSEntries: entry passed as stdin data, not shell-interpolated", () => {
-  const srcPath = new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url).pathname;
+  const srcPath = fileURLToPath(new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url));
   const src = fs.readFileSync(srcPath, "utf8");
 
   // The stdin `data` is built from the batched entries and sent to tee via pipe —
@@ -261,7 +262,7 @@ test("addDNSEntries: entry passed as stdin data, not shell-interpolated", () => 
 
 test("addDNSEntries: generates both IPv4 and IPv6 lines per host", () => {
   // Validate by reading source — the dnsLines helper must produce both.
-  const srcPath = new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url).pathname;
+  const srcPath = fileURLToPath(new URL("../../src/mitm/dns/dnsConfig.ts", import.meta.url));
   const src = fs.readFileSync(srcPath, "utf8");
   assert.ok(src.includes("127.0.0.1 ${hostname}"), "must produce 127.0.0.1 entry");
   assert.ok(src.includes("::1 ${hostname}"), "must produce ::1 entry");
