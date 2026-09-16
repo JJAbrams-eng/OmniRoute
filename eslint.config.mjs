@@ -253,6 +253,8 @@ const eslintConfig = [
       "app.__qa_backup/**",
       // CLI package copy directory
       "clipr/**",
+      // drizzle-kit dev-only introspection output (throwaway, gitignored, never authored by hand)
+      "src/lib/db/generated/**",
     ],
   },
 ];

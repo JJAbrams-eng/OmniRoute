@@ -139,6 +139,8 @@ jobs:
       - run: npm run check:migration-numbering
       - run: npm run check:public-creds
       - run: npm run check:db-rules
+      - run: npm run check:migration-lint
+        continue-on-error: true # advisory for one release cycle; flip to blocking after confirming zero false positives
       - run: npm run check:known-symbols
       - run: npm run check:route-guard-membership
       - run: npm run check:test-discovery
