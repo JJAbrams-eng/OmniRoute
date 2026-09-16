@@ -4,7 +4,9 @@
     "@testing-library/dom": "Peer dep obrigatoria de @testing-library/react v16 (adicionada no PR #11224); Refs #9985.",
     "@testing-library/user-event": "Utilitario oficial do ecossistema testing-library para testes de UI (adicionada no PR #11224); Refs #9985.",
     "babel-plugin-react-compiler": "Official React Compiler Babel plugin (facebook/react, MIT). Required peer of Next.js 16 `reactCompiler: true`; Next declares it optional (`*`) and does not auto-install. Added by PR #11783 / issue #67.",
-    "eslint-plugin-react-hooks": "React Hooks lint rules (set-state-in-effect, immutability, refs, purity) pinned at 7.0.1 by the release/v3.8.51 cycle; the 224 findings it raised are tracked in #11924. Refs #11924."
+    "eslint-plugin-react-hooks": "React Hooks lint rules (set-state-in-effect, immutability, refs, purity) pinned at 7.0.1 by the release/v3.8.51 cycle; the 224 findings it raised are tracked in #11924. Refs #11924.",
+    "drizzle-kit": "Dev-only, optional schema introspection/diff tool for src/lib/db/ migration authoring (db:schema:pull/diff). Never loaded at runtime; migrationRunner.ts and _omniroute_migrations stay the sole runtime source of truth. Added alongside check:migration-lint.",
+    "drizzle-orm": "Peer dep required by drizzle-kit for type defs only; no query-builder usage anywhere in the codebase. See drizzle-kit justification above."
   },
   "allowed": [
     "@atjsh/llmlingua-2",
@@ -60,6 +62,8 @@
     "ctrf",
     "dompurify",
     "dpdm",
+    "drizzle-kit",
+    "drizzle-orm",
     "electron",
     "electron-builder",
     "electron-updater",
