@@ -614,6 +614,15 @@ const AGENTIC_FEATURES_ITEMS: readonly SidebarSectionChild[] = [
     icon: "device_hub",
   },
   {
+    id: "orchestrator",
+    href: "/dashboard/orchestrator",
+    i18nKey: "orchestrator",
+    labelFallback: "Agent Orchestrator",
+    subtitleKey: "orchestratorSubtitle",
+    subtitleFallback: "Workers, review, repair and token limits",
+    icon: "account_tree",
+  },
+  {
     id: "plugins",
     href: "/dashboard/plugins",
     i18nKey: "plugins",

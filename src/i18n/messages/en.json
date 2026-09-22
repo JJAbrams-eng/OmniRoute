@@ -1010,6 +1010,8 @@
     "playground": "Playground",
     "searchTools": "Search Tools",
     "agents": "Agents",
+    "orchestrator": "Agent Orchestrator",
+    "orchestratorSubtitle": "Workers, review, repair and token limits",
     "cloudAgents": "Cloud Agents",
     "memory": "Memory",
     "skills": "Skills",

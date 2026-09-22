@@ -166,7 +166,7 @@ function usePageInfo(pathname: string | null): PageInfo {
   if (item) {
     const descKey = HEADER_DESCRIPTIONS[item.id];
     return {
-      title: ts(item.i18nKey),
+      title: ts.has(item.i18nKey) ? ts(item.i18nKey) : (item.labelFallback ?? item.id),
       description: descKey ? th(descKey) : "",
       icon: item.icon,
     };

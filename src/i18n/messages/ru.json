@@ -1010,6 +1010,8 @@
     "playground": "Площадка",
     "searchTools": "Инструменты поиска",
     "agents": "Агенты",
+    "orchestrator": "Оркестратор агентов",
+    "orchestratorSubtitle": "Рабочие агенты, проверка, доработка и лимиты токенов",
     "cloudAgents": "Облачные агенты",
     "memory": "Память",
     "skills": "Навыки",
