@@ -264,6 +264,9 @@ mise.toml
 _artifacts/          # release-green artifacts
 .claude-flow/
 
+# drizzle-kit dev-only introspection output (throwaway TS schema, never commit)
+src/lib/db/generated/
+
 # ESLint file cache (npm run lint --cache / complexity ratchets)
 .eslintcache
 .eslintcache-complexity

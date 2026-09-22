@@ -60,6 +60,28 @@ Full list: `ls src/lib/db/*.ts | wc -l` (115 files). Drift detection: `npm run c
 3. Migration runs automatically at startup via `migrationRunner.ts`
 4. Add unit tests in `tests/unit/db/`
 
+## Authoring a new migration (optional drizzle-kit aided workflow)
+
+`migrationRunner.ts` + `_omniroute_migrations` stays the only runtime source of truth.
+drizzle-kit is a dev-only, optional aid for drafting the SQL — nothing it generates is ever
+committed or run at runtime.
+
+1. `npm run db:schema:pull` — builds a throwaway, fully-migrated SQLite DB (never touches
+   `~/.omniroute/storage.sqlite`) and introspects it into `src/lib/db/generated/schema.ts`
+   (gitignored).
+2. Hand-edit `schema.ts` to express the desired next state.
+3. `npm run db:schema:diff` — `drizzle-kit generate` writes a draft SQL file into
+   `src/lib/db/generated/`.
+4. Review the draft, manually wrap it in this project's idempotency guards
+   (`CREATE TABLE IF NOT EXISTS`, etc. — drizzle's raw output omits them), and copy it to
+   `src/lib/db/migrations/NNN_description.sql` following the existing zero-padded convention.
+5. Delete `src/lib/db/generated/` — nothing from steps 1-3 is ever committed.
+
+New migration files are scanned by `npm run check:migration-lint` (CI, advisory for one
+release cycle) for destructive patterns (`DROP TABLE`/`COLUMN`, `RENAME`, `DROP INDEX`). A
+legitimate destructive change needs a `-- allow-destructive: <reason + issue>` comment within
+5 lines above the statement.
+
 ## Anti-Patterns
 
 - Raw SQL in routes — always use domain module functions
