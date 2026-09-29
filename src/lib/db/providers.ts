@@ -14,6 +14,7 @@ import {
 } from "./encryption";
 import { createLazyRowProxy } from "./providers/lazyConnectionView";
 import { invalidateDbCache, getCachedRawProviderConnections } from "./readCache";
+import { invalidateConnectionUpdate } from "./readCache";
 import { reorderConnections } from "./providers/deletion";
 import {
   removeConnectionHealth,
@@ -35,6 +36,7 @@ import {
   parseProviderSpecificData,
   isMatchingOauthIdentity,
 } from "./webSessionDedup";
+import { LOCAL_PROVIDERS } from "@/shared/constants/providers";
 import { pickCodexConnectionForUser } from "@/lib/oauth/utils/codexConnectionSelection";
 import { isMicrosoftDesignerWebRetiredProviderId } from "@/shared/constants/designerWebRetirement";
 import { reconcileCodexUsageHistory } from "./providers/usageIdentityReconciliation";
@@ -229,6 +231,7 @@ export const PROVIDER_CONNECTIONS_COLUMNS = new Set([
   "rate_limit_overrides_json",
   "created_at",
   "updated_at",
+  "synced_models_at",
 ]);
 
 // ──────────────── Provider Connections ────────────────
@@ -417,6 +420,28 @@ export function getProviderConnectionDisplayMetadata(
 // createProviderConnection to keep that function below the complexity baseline.
 // provider_specific_data is plaintext JSON, so the value is compared directly
 // without decryption.
+/**
+ * #12173 — the API-key-value dedup (#3023) matches purely on `provider +
+ * apiKey`, which is correct for hosted providers where the key alone is the
+ * account identity. Local/self-hosted providers (LM Studio, Ollama, vLLM,
+ * llama.cpp, ...) commonly ship an optional/cosmetic API key, so users
+ * legitimately reuse the same placeholder value (e.g. "lm-studio") across two
+ * physically distinct servers that are actually distinguished by base URL.
+ * Gate the extra baseUrl check to this provider set only — hosted-provider
+ * dedup must stay untouched.
+ */
+function isLocalProviderId(providerId: unknown): boolean {
+  return (
+    typeof providerId === "string" &&
+    Object.prototype.hasOwnProperty.call(LOCAL_PROVIDERS, providerId)
+  );
+}
+
+/** Trim + strip a trailing slash so cosmetic differences don't defeat the match. */
+function normalizeBaseUrlForDedup(value: unknown): string {
+  return typeof value === "string" ? value.trim().replace(/\/+$/, "") : "";
+}
+
 function findExistingCookieConnection(
   db: DbLike,
   provider: unknown,
@@ -551,15 +576,25 @@ export async function createProviderConnection(data: JsonRecord) {
     // plaintext (trimmed) instead.
     const newApiKey = typeof data.apiKey === "string" ? data.apiKey.trim() : "";
     if (!existing && newApiKey) {
+      const isLocal = isLocalProviderId(data.provider);
+      const newBaseUrl = normalizeBaseUrlForDedup(providerSpecificData.baseUrl);
       const apiKeyRows = db
         .prepare("SELECT * FROM provider_connections WHERE provider = ? AND auth_type = 'apikey'")
         .all(data.provider) as JsonRecord[];
       for (const row of apiKeyRows) {
         const decrypted = decryptConnectionFields(toRecord(rowToCamel(row)));
-        if (toStringOrNull(decrypted.apiKey)?.trim() === newApiKey) {
-          existing = row;
-          break;
+        if (toStringOrNull(decrypted.apiKey)?.trim() !== newApiKey) continue;
+        // #12173 — for local/self-hosted providers, a differing base URL means
+        // this is a different physical server, not the same account; fall
+        // through to inserting a new connection even though the apiKey matches.
+        if (isLocal) {
+          const existingBaseUrl = normalizeBaseUrlForDedup(
+            parseProviderSpecificData(row.provider_specific_data)?.baseUrl
+          );
+          if (existingBaseUrl !== newBaseUrl) continue;
         }
+        existing = row;
+        break;
       }
     }
   } else if (data.authType === "cookie") {
@@ -994,7 +1029,7 @@ export async function updateProviderConnection(id: string, data: JsonRecord) {
     _updateConnectionRow(db, id, encryptConnectionFields({ ...merged }));
   })();
   backupDbFile("pre-write");
-  invalidateDbCache("connections"); // Bust connections read cache
+  invalidateConnectionUpdate(id, data);
   bumpProxyConfigGeneration();
 
   if (data.priority !== undefined) {
@@ -1064,11 +1099,36 @@ export async function touchConnectionLastUsed(
 }
 
 /**
+ * #12849: stamp when a connection's synced model catalog was last written.
+ * getActiveSyncedCatalog reads this to stop treating a synced catalog as
+ * authoritative forever — a connection synced once and never refreshed
+ * silently pinned routing to that point-in-time snapshot with no staleness
+ * check. Lightweight targeted UPDATE, mirrors touchConnectionLastUsed.
+ */
+export async function touchConnectionSyncedModelsAt(id: string): Promise<void> {
+  if (!id) return;
+  const db = getDbInstance() as unknown as DbLike;
+  const now = new Date().toISOString();
+  db.prepare(
+    `UPDATE provider_connections SET
+      synced_models_at = @syncedModelsAt,
+      updated_at = @updatedAt
+    WHERE id = @id`
+  ).run({
+    syncedModelsAt: now,
+    updatedAt: now,
+    id,
+  });
+}
+
+/**
  * Lightweight backoff reset — runs a targeted UPDATE without SELECT or re-encrypt.
  * Follows the `clearConnectionErrorIfUnchanged` pattern but without the CAS check,
  * since the caller already verified the connection is eligible for reset.
  * Resets all backoff/error columns so the connection re-enters the selection pool.
  * Does invalidateDbCache + bumpProxyConfigGeneration since backoff affects priority.
+ * #13389: `skipModelCatalog` — the catalog builder never reads backoff/error
+ * state, so this must not bust the expensive-to-rebuild `/v1/models` cache.
  */
 export async function resetConnectionBackoff(id: string): Promise<void> {
   if (!id) return;
@@ -1089,7 +1149,7 @@ export async function resetConnectionBackoff(id: string): Promise<void> {
     updatedAt: now,
     id,
   });
-  invalidateDbCache("connections");
+  invalidateDbCache("connections", id, { skipModelCatalog: true });
   bumpProxyConfigGeneration();
 }
 

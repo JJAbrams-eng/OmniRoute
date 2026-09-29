@@ -46,11 +46,11 @@ import { closeAuditDb, logToolCall } from "./audit.ts";
 import {
   evaluateToolScopes,
   resolveCallerScopeContext,
+  shouldForceScopeEnforcement,
   type McpToolExtraLike,
 } from "./scopeEnforcement.ts";
 import { getMcpHttpAuthHeadersForInternalFetch } from "./httpAuthContext.ts";
 import { getInternalServiceAuthHeaders } from "../../src/lib/api/internalServiceAuth.ts";
-import { hasManageScope } from "../../src/shared/constants/managementScopes.ts";
 import {
   handleSimulateRoute,
   handleSetBudgetGuard,
@@ -94,6 +94,7 @@ import {
 import { getDbInstance, ensureDbInitialized } from "../../src/lib/db/core.ts";
 import { normalizeQuotaResponse } from "../../src/shared/contracts/quota.ts";
 import { resolveOmniRouteBaseUrl } from "../../src/shared/utils/resolveOmniRouteBaseUrl.ts";
+import { isMcpScopeEnforcementEnabled } from "../../src/shared/utils/featureFlags.ts";
 import { toSafeMcpErrorMessage } from "./errorMessage.ts";
 import { mcpFetchTimeoutSignal } from "./fetchTimeout.ts";
 import { getMcpModelsCatalog } from "./catalog.ts";
@@ -102,15 +103,6 @@ import type { TextToolResult } from "./toolResult.ts";
 export { getMcpModelsCatalog } from "./catalog.ts";
 
 const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
-// Opt-in per-tool scope enforcement — off by default. This is safe ONLY for the
-// documented local/stdio single-operator use case, where there is no per-caller
-// identity to scope against (see httpAuthContext.ts / docs/frameworks/MCP-SERVER.md).
-// It must NOT be the only gate for remote/non-loopback HTTP+SSE MCP access: see
-// the `forceEnforceScopes` check in `withScopeEnforcement()` below, which turns
-// enforcement on unconditionally for any caller resolved from a per-key HTTP
-// Authorization header that does not hold full `manage`/`admin` scope (in
-// particular, a key holding only the narrow `mcp:connect` bypass scope).
-const MCP_ENFORCE_SCOPES = process.env.OMNIROUTE_MCP_ENFORCE_SCOPES === "true";
 const MCP_ALLOWED_SCOPES = new Set(
   (process.env.OMNIROUTE_MCP_SCOPES || "")
     .split(",")
@@ -182,11 +174,6 @@ function isLaneFlagOn(value: unknown): boolean {
   return value === true || value === "1" || value === "true";
 }
 
-function toStringArray(value: unknown, fallback: string[] = []): string[] {
-  const values = toArray(value).filter((entry): entry is string => typeof entry === "string");
-  return values.length > 0 ? values : fallback;
-}
-
 function normalizeComboModels(
   rawModels: unknown
 ): Array<{ provider: string; model: string; priority: number }> {
@@ -243,22 +230,10 @@ function withScopeEnforcement(
 ) {
   return async (args: unknown, extra?: McpToolExtraLike): Promise<TextToolResult> => {
     const scopeContext = resolveCallerScopeContext(extra, Array.from(MCP_ALLOWED_SCOPES));
-    // Security: OMNIROUTE_MCP_ENFORCE_SCOPES is opt-in (defaults to false) to keep
-    // the documented local/stdio single-operator flow friction-free. That default
-    // must never extend to a caller resolved from a real per-key HTTP Authorization
-    // header (scopeContext.source === "authInfo" — populated HTTP/SSE-only, see
-    // the auth-info resolver in httpAuthContext.ts) unless that key already holds
-    // full `manage`/`admin` scope. Without this, an API key granted ONLY the narrow
-    // `mcp:connect` bypass scope (authorized for nothing but the /api/mcp/
-    // LOCAL_ONLY carve-out) could invoke every MCP tool once an operator enables
-    // remote/non-loopback MCP access, because evaluateToolScopes() short-circuits
-    // to `allowed: true` while enforcement is off.
-    const forceEnforceScopes =
-      scopeContext.source === "authInfo" && !hasManageScope(scopeContext.scopes);
     const scopeCheck = evaluateToolScopes(
       toolName,
       scopeContext.scopes,
-      MCP_ENFORCE_SCOPES || forceEnforceScopes,
+      isMcpScopeEnforcementEnabled() || shouldForceScopeEnforcement(scopeContext),
       toolScopes
     );
     if (!scopeCheck.allowed) {
@@ -1560,7 +1535,7 @@ export async function startMcpStdio(): Promise<void> {
   const version = process.env.npm_package_version || "1.8.1";
   const stopHeartbeat = startMcpHeartbeat({
     version,
-    scopesEnforced: MCP_ENFORCE_SCOPES,
+    scopesEnforced: isMcpScopeEnforcementEnabled,
     allowedScopes: Array.from(MCP_ALLOWED_SCOPES),
     toolCount: TOTAL_MCP_TOOL_COUNT,
   });

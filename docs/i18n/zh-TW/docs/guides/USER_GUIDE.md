@@ -1,12 +1,10 @@
----
-title: "使用者指南"
-version: 3.8.40
-lastUpdated: 2026-06-28
+# User Guide (中文 (繁體))
+
+🌐 **Languages:** 🇺🇸 [English](../../../../guides/USER_GUIDE.md) · 🇪🇹 [am](../../../am/docs/guides/USER_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/guides/USER_GUIDE.md) · 🇦🇿 [az](../../../az/docs/guides/USER_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/guides/USER_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/guides/USER_GUIDE.md) · 🇧🇦 [bs](../../../bs/docs/guides/USER_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/guides/USER_GUIDE.md) · 🇩🇰 [da](../../../da/docs/guides/USER_GUIDE.md) · 🇩🇪 [de](../../../de/docs/guides/USER_GUIDE.md) · 🇬🇷 [el](../../../el/docs/guides/USER_GUIDE.md) · 🇪🇸 [es](../../../es/docs/guides/USER_GUIDE.md) · 🇪🇪 [et](../../../et/docs/guides/USER_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/guides/USER_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/guides/USER_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/guides/USER_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/guides/USER_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/guides/USER_GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/guides/USER_GUIDE.md) · 🇮🇱 [he](../../../he/docs/guides/USER_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/guides/USER_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/guides/USER_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/guides/USER_GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/guides/USER_GUIDE.md) · 🇮🇩 [id](../../../id/docs/guides/USER_GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/guides/USER_GUIDE.md) · 🇮🇹 [it](../../../it/docs/guides/USER_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/guides/USER_GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/guides/USER_GUIDE.md) · 🇰🇭 [km](../../../km/docs/guides/USER_GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/guides/USER_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/guides/USER_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/guides/USER_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/guides/USER_GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/guides/USER_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/guides/USER_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/guides/USER_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/guides/USER_GUIDE.md) · 🇲🇲 [my](../../../my/docs/guides/USER_GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/guides/USER_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/guides/USER_GUIDE.md) · 🇳🇴 [no](../../../no/docs/guides/USER_GUIDE.md) · 🇮🇳 [or](../../../or/docs/guides/USER_GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/guides/USER_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/guides/USER_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/guides/USER_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/guides/USER_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/USER_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/guides/USER_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/guides/USER_GUIDE.md) · 🇱🇰 [si](../../../si/docs/guides/USER_GUIDE.md) · 🇸🇰 [sk](../../../sk/docs/guides/USER_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/guides/USER_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/guides/USER_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/guides/USER_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/guides/USER_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/guides/USER_GUIDE.md) · 🇮🇳 [te](../../../te/docs/guides/USER_GUIDE.md) · 🇹🇭 [th](../../../th/docs/guides/USER_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/guides/USER_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/USER_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/guides/USER_GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/guides/USER_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/guides/USER_GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/guides/USER_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/USER_GUIDE.md)
+
 ---
 
-# 使用者指南
-
-🌐 **Languages:** 🇺🇸 [English](../../../../guides/USER_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/guides/USER_GUIDE.md) · 🇦🇿 [az](../../../az/docs/guides/USER_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/guides/USER_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/guides/USER_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/guides/USER_GUIDE.md) · 🇩🇰 [da](../../../da/docs/guides/USER_GUIDE.md) · 🇩🇪 [de](../../../de/docs/guides/USER_GUIDE.md) · 🇬🇷 [el](../../../el/docs/guides/USER_GUIDE.md) · 🇪🇸 [es](../../../es/docs/guides/USER_GUIDE.md) · 🇪🇪 [et](../../../et/docs/guides/USER_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/guides/USER_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/guides/USER_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/guides/USER_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/guides/USER_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/guides/USER_GUIDE.md) · 🇮🇱 [he](../../../he/docs/guides/USER_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/guides/USER_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/guides/USER_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/guides/USER_GUIDE.md) · 🇮🇩 [id](../../../id/docs/guides/USER_GUIDE.md) · 🇮🇹 [it](../../../it/docs/guides/USER_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/guides/USER_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/guides/USER_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/guides/USER_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/guides/USER_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/guides/USER_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/guides/USER_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/guides/USER_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/guides/USER_GUIDE.md) · 🇳🇴 [no](../../../no/docs/guides/USER_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/guides/USER_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/guides/USER_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/guides/USER_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/USER_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/guides/USER_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/guides/USER_GUIDE.md) · 🇸🇰 [sk](../../../sk/docs/guides/USER_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/guides/USER_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/guides/USER_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/guides/USER_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/guides/USER_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/guides/USER_GUIDE.md) · 🇮🇳 [te](../../../te/docs/guides/USER_GUIDE.md) · 🇹🇭 [th](../../../th/docs/guides/USER_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/guides/USER_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/USER_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/guides/USER_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/guides/USER_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/USER_GUIDE.md)
+🌐 **Languages:** 🇺🇸 [English](../../../../guides/USER_GUIDE.md) · 🇪🇹 [am](../../../am/docs/guides/USER_GUIDE.md) · 🇸🇦 [ar](../../../ar/docs/guides/USER_GUIDE.md) · 🇦🇿 [az](../../../az/docs/guides/USER_GUIDE.md) · 🇧🇬 [bg](../../../bg/docs/guides/USER_GUIDE.md) · 🇧🇩 [bn](../../../bn/docs/guides/USER_GUIDE.md) · 🇧🇦 [bs](../../../bs/docs/guides/USER_GUIDE.md) · 🇨🇿 [cs](../../../cs/docs/guides/USER_GUIDE.md) · 🇩🇰 [da](../../../da/docs/guides/USER_GUIDE.md) · 🇩🇪 [de](../../../de/docs/guides/USER_GUIDE.md) · 🇬🇷 [el](../../../el/docs/guides/USER_GUIDE.md) · 🇪🇸 [es](../../../es/docs/guides/USER_GUIDE.md) · 🇪🇪 [et](../../../et/docs/guides/USER_GUIDE.md) · 🇮🇷 [fa](../../../fa/docs/guides/USER_GUIDE.md) · 🇫🇮 [fi](../../../fi/docs/guides/USER_GUIDE.md) · 🇫🇷 [fr](../../../fr/docs/guides/USER_GUIDE.md) · 🇮🇪 [ga](../../../ga/docs/guides/USER_GUIDE.md) · 🇮🇳 [gu](../../../gu/docs/guides/USER_GUIDE.md) · 🇳🇬 [ha](../../../ha/docs/guides/USER_GUIDE.md) · 🇮🇱 [he](../../../he/docs/guides/USER_GUIDE.md) · 🇮🇳 [hi](../../../hi/docs/guides/USER_GUIDE.md) · 🇭🇷 [hr](../../../hr/docs/guides/USER_GUIDE.md) · 🇭🇺 [hu](../../../hu/docs/guides/USER_GUIDE.md) · 🇦🇲 [hy](../../../hy/docs/guides/USER_GUIDE.md) · 🇮🇩 [id](../../../id/docs/guides/USER_GUIDE.md) · 🇳🇬 [ig](../../../ig/docs/guides/USER_GUIDE.md) · 🇮🇹 [it](../../../it/docs/guides/USER_GUIDE.md) · 🇯🇵 [ja](../../../ja/docs/guides/USER_GUIDE.md) · 🇬🇪 [ka](../../../ka/docs/guides/USER_GUIDE.md) · 🇰🇭 [km](../../../km/docs/guides/USER_GUIDE.md) · 🇮🇳 [kn](../../../kn/docs/guides/USER_GUIDE.md) · 🇰🇷 [ko](../../../ko/docs/guides/USER_GUIDE.md) · 🇱🇹 [lt](../../../lt/docs/guides/USER_GUIDE.md) · 🇱🇻 [lv](../../../lv/docs/guides/USER_GUIDE.md) · 🇮🇳 [ml](../../../ml/docs/guides/USER_GUIDE.md) · 🇮🇳 [mr](../../../mr/docs/guides/USER_GUIDE.md) · 🇲🇾 [ms](../../../ms/docs/guides/USER_GUIDE.md) · 🇲🇹 [mt](../../../mt/docs/guides/USER_GUIDE.md) · 🇲🇲 [my](../../../my/docs/guides/USER_GUIDE.md) · 🇳🇵 [ne](../../../ne/docs/guides/USER_GUIDE.md) · 🇳🇱 [nl](../../../nl/docs/guides/USER_GUIDE.md) · 🇳🇴 [no](../../../no/docs/guides/USER_GUIDE.md) · 🇮🇳 [or](../../../or/docs/guides/USER_GUIDE.md) · 🇮🇳 [pa](../../../pa/docs/guides/USER_GUIDE.md) · 🇵🇭 [phi](../../../phi/docs/guides/USER_GUIDE.md) · 🇵🇱 [pl](../../../pl/docs/guides/USER_GUIDE.md) · 🇵🇹 [pt](../../../pt/docs/guides/USER_GUIDE.md) · 🇧🇷 [pt-BR](../../../pt-BR/docs/guides/USER_GUIDE.md) · 🇷🇴 [ro](../../../ro/docs/guides/USER_GUIDE.md) · 🇷🇺 [ru](../../../ru/docs/guides/USER_GUIDE.md) · 🇱🇰 [si](../../../si/docs/guides/USER_GUIDE.md) · 🇸🇰 [sk](../../../sk/docs/guides/USER_GUIDE.md) · 🇸🇮 [sl](../../../sl/docs/guides/USER_GUIDE.md) · 🇷🇸 [sr](../../../sr/docs/guides/USER_GUIDE.md) · 🇸🇪 [sv](../../../sv/docs/guides/USER_GUIDE.md) · 🇰🇪 [sw](../../../sw/docs/guides/USER_GUIDE.md) · 🇮🇳 [ta](../../../ta/docs/guides/USER_GUIDE.md) · 🇮🇳 [te](../../../te/docs/guides/USER_GUIDE.md) · 🇹🇭 [th](../../../th/docs/guides/USER_GUIDE.md) · 🇹🇷 [tr](../../../tr/docs/guides/USER_GUIDE.md) · 🇺🇦 [uk-UA](../../../uk-UA/docs/guides/USER_GUIDE.md) · 🇵🇰 [ur](../../../ur/docs/guides/USER_GUIDE.md) · 🇺🇿 [uz](../../../uz/docs/guides/USER_GUIDE.md) · 🇻🇳 [vi](../../../vi/docs/guides/USER_GUIDE.md) · 🇳🇬 [yo](../../../yo/docs/guides/USER_GUIDE.md) · 🇨🇳 [zh-CN](../../../zh-CN/docs/guides/USER_GUIDE.md)
 
 設定提供者、建立組合、整合 CLI 工具及部署 OmniRoute 的完整指南。
 
@@ -122,14 +120,16 @@ Combo：「openclaw-free」
 
 ## 📖 提供者設定
 
-### 🔐 訂閱制提供者
+若要從 CSV 或 JSON 檔案大量新增 API 金鑰連線，請使用 **控制台 → 提供者 → 從檔案匯入**。欄位採固定順序（`provider,name,apiKey,baseUrl,priority`）；`provider` 必須已作為受管理的提供者或相容節點存在。請參閱[從 CSV 或 JSON 檔案匯入提供者](../providers/CSV-IMPORT.md)。
 
-#### Claude Code（Pro/Max）
+### 🔐 訂閱型提供者
+
+#### Claude Code (Pro/Max)
 
 ```bash
-控制台 → 提供者 → 連接 Claude Code
-→ OAuth 登入 → 自動權杖重新整理
-→ 5 小時 + 每週額度追蹤
+控制台 → 提供者 → 連線 Claude Code
+→ OAuth 登入 → 自動重新整理權杖
+→ 5 小時與每週配額追蹤
 
 模型：
   cc/claude-opus-4-7
@@ -137,18 +137,16 @@ Combo：「openclaw-free」
   cc/claude-haiku-4-5-20251001
 ```
 
-**小撇步：** 複雜任務使用 Opus，追求速度使用 Sonnet。OmniRoute 會追蹤每個模型的額度！
+**專業提示：** 複雜任務使用 Opus，追求速度則使用 Sonnet。OmniRoute 會分別追蹤每個模型的配額！
 
-Claude 及與 Claude Code 相容的路由會保留 Opus 和 Sonnet 模型的 `max` 思考強度設定。
-Haiku 模型不接受 `max` 思考強度層級，因此 OmniRoute 會在將請求發送給上游之前，
-將該設定降級為較高的思考預算。
+Claude 與 Claude Code 相容路由會保留 Opus 和 Sonnet 模型的 `max` 思考強度。Haiku 模型不接受 `max` 強度層級，因此 OmniRoute 會先將該請求降級為較高的思考預算，再將其傳送至上游。
 
-#### OpenAI Codex（Plus/Pro）
+#### OpenAI Codex (Plus/Pro)
 
 ```bash
-控制台 → 提供者 → 連接 Codex
+控制台 → 提供者 → 連線 Codex
 → OAuth 登入（連接埠 1455）
-→ 5 小時 + 每週重置
+→ 5 小時與每週重設
 
 模型：
   cx/gpt-5.5
@@ -160,9 +158,9 @@ Haiku 模型不接受 `max` 思考強度層級，因此 OmniRoute 會在將請�
 #### GitHub Copilot
 
 ```bash
-控制台 → 提供者 → 連接 GitHub
-→ 透過 GitHub OAuth
-→ 每月重置（每月 1 日）
+控制台 → 提供者 → 連線 GitHub
+→ 透過 GitHub 進行 OAuth
+→ 每月重設（每月 1 日）
 
 模型：
   gh/gpt-5.5
@@ -172,55 +170,53 @@ Haiku 模型不接受 `max` 思考強度層級，因此 OmniRoute 會在將請�
   gh/gemini-3.1-pro-preview
 ```
 
-### 💰 便宜提供者
+### 💰 低價提供者
 
-#### GLM-4.7（每日重置，$0.6/百萬）
+#### GLM-4.7（每日重設，$0.6/1M）
 
-1. 註冊：[智譜 AI](https://open.bigmodel.cn)
+1. 註冊：[Zhipu AI](https://open.bigmodel.cn)
 2. 從 Coding Plan 取得 API 金鑰
 3. 控制台 → 新增 API 金鑰：提供者：`glm`，API 金鑰：`your-key`
 
-**使用：** `glm/glm-4.7` — **小撇步：** Coding Plan 提供 3 倍額度，僅需 1/7 費用！每日上午 10:00 重置。
+**使用：** `glm/glm-4.7` — **專業提示：** Coding Plan 以 1/7 的成本提供 3 倍配額！每日上午 10:00 重設。
 
-#### MiniMax M2.1（5 小時重置，$0.20/百萬）
+#### MiniMax M2.1（5 小時重設，$0.20/1M）
 
 1. 註冊：[MiniMax](https://www.minimax.io)
 2. 取得 API 金鑰 → 控制台 → 新增 API 金鑰
 
-**使用：** `minimax/MiniMax-M2.1` — **小撇步：** 長上下文（100 萬權杖）的最便宜選擇！
+**使用：** `minimax/MiniMax-M2.1` — **專業提示：** 長上下文最便宜的選擇（1M 個權杖）！
 
-#### Kimi K2（每月 $9 固定）
+#### Kimi K2（固定每月 $9）
 
-1. 訂閱：[Moonshot AI](https://platform.moonshot.ai)
+1. 訂閱：[Moonshot AI](https://platform.kimi.ai?aff=omniroute)
 2. 取得 API 金鑰 → 控制台 → 新增 API 金鑰
 
-**使用：** `kimi/kimi-k2.5` — **小撇步：** 每月 $9 固定費用，1,000 萬權杖 = 每百萬權杖 $0.90 有效成本！
+**使用：** `kimi/kimi-k2.5` — **專業提示：** 10M 個權杖固定每月 $9，實際成本為 $0.90/1M！
 
-#### 百度千帆 / ERNIE
+#### Baidu Qianfan / ERNIE
 
-1. 註冊：[百度 AI 雲千帆](https://cloud.baidu.com/product/wenxinworkshop)
-2. 建立千帆 API 金鑰 → 控制台 → 新增 API 金鑰：提供者：`qianfan`
+1. 註冊：[Baidu AI Cloud Qianfan](https://cloud.baidu.com/product/wenxinworkshop)
+2. 建立 Qianfan API 金鑰 → 控制台 → 新增 API 金鑰：提供者：`qianfan`
 
-**使用：** `qianfan/ernie-5.1`、`qianfan/ernie-x1.1`，或其他千帆 OpenAI 相容模型 ID。
+**使用：** `qianfan/ernie-5.1`、`qianfan/ernie-x1.1`，或其他與 OpenAI 相容的 Qianfan 模型 ID。
 
 ### 🆓 免費提供者
 
-無需驗證的免費提供者在其提供者頁面上有一個**無需身份驗證**的開關。
-關閉該開關會停用該提供者，將其從「提供者配置」/「精簡檢視」中移除，
-並從 `/v1/models` 中移除其模型。
+無須驗證的免費提供者，其提供者頁面上的 **不需要驗證** 旁設有切換開關。將其關閉會停用該提供者、從「提供者」的已設定／精簡檢視中移除，並從 `/v1/models` 移除其模型。
 
 #### Qoder（9 個免費模型）
 
 ```bash
-控制台 → 連接 Qoder → OAuth 登入 → 依提供者目前條件使用
+控制台 → 連線 Qoder → OAuth 登入 → 存取權受提供者目前的限制約束
 
 模型：if/qwen3.8-max-preview, if/qwen3.7-max, if/qwen3.7-plus, if/kimi-k3, if/kimi-k2.7-code, if/glm-5.2, if/deepseek-v4-pro, if/deepseek-v4-flash, if/minimax-m3
 ```
 
-#### Kiro（Claude 免費使用）
+#### Kiro（免費 Claude）
 
 ```bash
-控制台 → 連接 Kiro → AWS Builder ID 或 Google/GitHub → 約 50 點/月
+控制台 → 連線 Kiro → AWS Builder ID 或 Google/GitHub → 每月約 50 點額度
 
 模型：kr/claude-sonnet-4.5, kr/claude-haiku-4.5
 ```
@@ -631,19 +627,56 @@ curl -X POST http://localhost:20128/api/provider-models \
 # 移除：curl -X DELETE "http://localhost:20128/api/provider-models?provider=openai&model=gpt-5.2"
 ```
 
-或使用控制台：**提供者 → [提供者] → 自訂模型**。
+或者使用控制台：**Providers → [Provider] → Custom Models**。
 
-注意：
+注意事項：
 
-- OpenRouter 和 OpenAI/Anthropic 相容提供者僅透過**可用模型**管理。手動新增、匯入和自動同步都會匯入同一個可用模型清單，因此這些提供者沒有獨立的自訂模型區塊。
-- **自訂模型**區塊專為不提供受管可用模型匯入的提供者而設計。
+- OpenRouter 與 OpenAI/Anthropic 相容提供者僅透過 **Available Models** 管理。手動新增、匯入及自動同步的模型都會進入同一個可用模型清單，因此這些提供者沒有獨立的 Custom Models 區段。
+- **Custom Models** 區段適用於不提供受管理可用模型匯入功能的提供者。
 
-### 串聯 OmniRoute 對等節點
+### 自訂 OpenAI 相容提供者
 
-另一個 OmniRoute 閘道可以作為**自訂 OpenAI 相容**提供者加入。使用
-對等節點的 `/v1` 基礎網址以及由該對等節點簽發的專用最小權限 API 金鑰。
+任何使用 OpenAI API 的閘道（自架 Proxy、vLLM、第三方彙整服務）
+都可以新增為獨立的提供者節點：
 
-對於雙向或多跳鍊，請在每個閘道上啟用選擇性迴圈防護：
+1. **Providers → Add OpenAI Compatible**。
+2. **Name**：節點的顯示標籤。
+3. **Prefix**：路由名稱。用戶端會以 `<prefix>/<model>` 呼叫模型，因此前綴為
+   `mygw` 的節點會提供 `mygw/gpt-4o-mini`。此欄位為必填；沒有字元限制。
+4. **API Type**：閘道提供的端點系列（Chat Completions、Responses、
+   Embeddings、音訊、圖片）。
+5. **Base URL**：API 根路徑，直到並包含 `/v1`（例如
+   `https://gateway.example.com/v1`），而非完整的 `/chat/completions` 路徑。使用
+   非標準路徑的閘道可在 **Advanced Settings** 下設定（聊天路徑、模型路徑）。
+6. **API Key (for Check)** 欄位僅用於測試連線。建立節點後，
+   開啟該節點並使用 **Add Connection** 儲存請求實際使用的金鑰。
+
+節點會取得格式為 `openai-compatible-<apiType>-<uuid>` 的內部 ID；您永遠
+不需要輸入該 ID，前綴就是公開名稱。
+
+#### 保留前綴
+
+前綴不能是內建提供者的 ID 或別名（例如 `openai`、`cf`），也不能是
+已停用提供者的 ID。模型解析器會先檢查內建 ID 與別名，再檢查
+自訂節點，因此使用這類前綴的節點永遠不會收到流量：
+`<prefix>/model` 會改為前往內建提供者，或在該提供者已停用時直接拒絕。
+使用這類前綴建立或編輯節點時，系統會顯示以下錯誤：
+
+```text
+prefix: "<prefix>" 是保留的提供者前綴 — 請選擇其他前綴（保留的 ID／別名不能用於自訂節點，因為像 <prefix>/model 這類請求會路由至內建提供者，或在該提供者停用時直接拒絕）
+```
+
+請選擇不同的前綴（`mygw`、`acme-proxy`）。如果傳送至自訂節點的請求失敗，且
+錯誤訊息提及內建提供者或其憑證，請檢查節點的前綴是否為
+保留前綴：在此規則生效前儲存的節點仍會保留，但其前綴會路由至
+內建提供者。請編輯該節點並指定新前綴。
+
+### 串接 OmniRoute 對等節點
+
+另一個 OmniRoute 閘道可以新增為**自訂 OpenAI 相容**提供者。請使用
+對等節點的 `/v1` Base URL，以及由該對等節點簽發的專用最小權限 API 金鑰。
+
+對於互連或多跳鏈路，請在每個閘道上啟用選擇性迴圈防護：
 
 ```bash
 # gateway-a
@@ -659,18 +692,18 @@ OMNIROUTE_PEER_URLS=http://gateway-a:20128/v1
 OMNIROUTE_PEER_MAX_HOPS=4
 ```
 
-只有發送到明確允許清單中的對等節點網址的請求，才會收到
-`X-OmniRoute-Peer-Trace` 標頭。閘道在遇到重複的執行個體 ID 或用盡跳數
-預算時，會回應 `508 Loop Detected`；一般上游提供者不會收到任何對等節點中繼資料。
+只有傳送至明確列入允許清單之對等節點 URL 的請求，才會收到
+`X-OmniRoute-Peer-Trace` 標頭。當執行個體 ID 重複或跳數配額耗盡時，
+閘道會以 HTTP `508 Loop Detected` 拒絕請求；一般上游提供者不會收到任何對等節點中繼資料。
 
-對等串聯並非資料庫複寫或主機容錯移轉。每個閘道維護獨立的
-SQLite 狀態、快取、速率計數器和工作階段。請使用健康檢查反向代理或用戶端
-容錯移轉來實現主動/被動或主動/主動的高可用性，且絕不要將一個 SQLite 資料庫
-掛載到多個正在執行的 OmniRoute 執行個體中。
+對等節點串接並非資料庫複寫或主機容錯移轉。每個閘道都會維護獨立的
+SQLite 狀態、快取、速率計數器及工作階段。若要實現主動／被動或主動／主動可用性，
+請使用具備健康檢查功能的反向 Proxy 或用戶端容錯移轉，且絕不可將同一個 SQLite 資料庫
+掛載至多個正在執行的 OmniRoute 執行個體。
 
 ### 專用提供者路由
 
-將請求直接路由到特定提供者，並附帶模型驗證：
+透過模型驗證，將請求直接路由至特定提供者：
 
 ```bash
 POST http://localhost:20128/v1/providers/openai/chat/completions
@@ -678,25 +711,25 @@ POST http://localhost:20128/v1/providers/openai/embeddings
 POST http://localhost:20128/v1/providers/fireworks/images/generations
 ```
 
-若缺少提供者前綴，會自動補上。模型不符時會回傳 `400` 錯誤。
+若缺少提供者前綴，系統會自動新增。模型不相符時會傳回 `400`。
 
-### 網路代理配置
+### 網路 Proxy 設定
 
 ```bash
-# 設定全域代理
+# 設定全域 Proxy
 curl -X PUT http://localhost:20128/api/settings/proxy \
   -d '{"global": {"type":"http","host":"proxy.example.com","port":"8080"}}'
 
-# 各提供者獨立代理
+# 各提供者的 Proxy
 curl -X PUT http://localhost:20128/api/settings/proxy \
   -d '{"providers": {"openai": {"type":"socks5","host":"proxy.example.com","port":"1080"}}}'
 
-# 測試代理
+# 測試 Proxy
 curl -X POST http://localhost:20128/api/settings/proxy/test \
   -d '{"proxy":{"type":"socks5","host":"proxy.example.com","port":"1080"}}'
 ```
 
-**優先順序：** 金鑰特定 → 組合特定 → 提供者特定 → 全域 → 環境變數。
+**優先順序：** 金鑰專屬 → 組合專屬 → 提供者專屬 → 全域 → 環境。
 
 ### 模型目錄 API
 
@@ -704,92 +737,92 @@ curl -X POST http://localhost:20128/api/settings/proxy/test \
 curl http://localhost:20128/api/models/catalog
 ```
 
-回傳按提供者分組的模型，包含類型（`chat`、`embedding`、`image`）。
+傳回依提供者分組的模型及其類型（`chat`、`embedding`、`image`）。
 
 ### 雲端同步
 
-- 跨裝置同步提供者、組合和設定
-- 自動背景同步，附帶超時和快速失敗機制
-- 生產環境中建議使用伺服器端的 `NEXT_PUBLIC_BASE_URL` / `NEXT_PUBLIC_CLOUD_URL`
+- 跨裝置同步提供者、組合與設定
+- 自動背景同步，支援逾時與快速失敗
+- 在正式環境中，優先使用伺服器端的 `NEXT_PUBLIC_BASE_URL`/`NEXT_PUBLIC_CLOUD_URL`
 
-### Cloudflare 快速隧道
+### Cloudflare 快速通道
 
-- 在**控制台 → 端點**中可用，適用於 Docker 和其他自架部署
-- 建立一個暫時的 `https://*.trycloudflare.com` 網址，轉發到您目前的 OpenAI 相容 `/v1` 端點
-- 首次啟用時僅在需要時安裝 `cloudflared`；後續重啟會重複使用相同的受管理二進位檔
-- 快速隧道在 OmniRoute 或容器重啟後不會自動恢復；請在需要時從控制台重新啟用
-- 隧道網址是暫時的，每次停止/啟動隧道時都會變更
-- 受管理的快速隧道預設使用 HTTP/2 傳輸，以避免在受限容器中產生大量的 QUIC UDP 緩衝區警告
-- 如果您想覆蓋受管理的傳輸選擇，請設定 `CLOUDFLARED_PROTOCOL=quic` 或 `auto`
-- 如果您偏好使用預先安裝的 `cloudflared` 二進位檔而非受管理的下載，請設定 `CLOUDFLARED_BIN`
-- Cloudflare 快速隧道、Tailscale Funnel 和 ngrok 隧道面板可在**設定 → 外觀**中顯示或隱藏。隱藏面板不會停止正在執行的隧道。
+- 適用於 Docker 與其他自行託管部署，可在 **Dashboard → Endpoints** 中使用
+- 建立暫時性的 `https://*.trycloudflare.com` URL，並將其轉送至目前與 OpenAI 相容的 `/v1` 端點
+- 首次啟用時，僅在需要時安裝 `cloudflared`；後續重新啟動會重複使用相同的受管理執行檔
+- OmniRoute 或容器重新啟動後，不會自動還原 Quick Tunnels；需要時請從儀表板重新啟用
+- Tunnel URL 為暫時性，每次停止／啟動 Tunnel 時都會變更
+- 受管理的 Quick Tunnels 預設使用 HTTP/2 傳輸，以避免在資源受限的容器中出現大量 QUIC UDP 緩衝區警告
+- 若要覆寫受管理的傳輸選擇，請將 `CLOUDFLARED_PROTOCOL` 設為 `quic` 或 `auto`
+- 若偏好使用預先安裝的 `cloudflared` 執行檔，而非受管理的下載版本，請設定 `CLOUDFLARED_BIN`
+- Cloudflare Quick Tunnel、Tailscale Funnel 與 ngrok Tunnel 面板可在 **Settings → Appearance** 中顯示或隱藏。隱藏面板不會停止正在執行的 Tunnel。
 
-### LLM 閘道智慧功能（第 9 階段）
+### LLM 閘道智慧功能（階段 9）
 
-- **語意快取** — 自動快取非串流、temperature=0 的回應（可透過 `X-OmniRoute-No-Cache: true` 繞過）
-- **請求冪等性** — 透過 `Idempotency-Key` 或 `X-Request-Id` 標頭在 5 秒內去重複請求
-- **進度追蹤** — 選擇性 SSE `event: progress` 事件，透過 `X-OmniRoute-Progress: true` 標頭啟用
+- **語意快取** — 自動快取非串流、temperature=0 的回應（可使用 `X-OmniRoute-No-Cache: true` 略過）
+- **請求冪等性** — 透過 `Idempotency-Key` 或 `X-Request-Id` 標頭，對 5 秒內的請求進行去重
+- **進度追蹤** — 透過 `X-OmniRoute-Progress: true` 標頭選擇啟用 SSE `event: progress` 事件
 
 ---
 
-### 翻譯器測試平台
+### 轉譯器操作區
 
-透過**控制台 → 翻譯器**存取。偵錯並視覺化 OmniRoute 如何在提供者之間轉換 API 請求。
+透過 **Dashboard → Translator** 存取。偵錯並視覺化 OmniRoute 如何在提供者之間轉譯 API 請求。
 
-| 模式           | 用途                                                  |
-| -------------- | ----------------------------------------------------- |
-| **測試平台**   | 選擇來源/目標格式，貼上請求，即可即時查看轉換後的輸出 |
-| **聊天測試器** | 透過代理發送即時聊天訊息，並檢查完整的請求/回應週期   |
-| **測試台**     | 跨多種格式組合執行批次測試，驗證轉換正確性            |
-| **即時監控**   | 即時觀察請求流經代理時的轉換過程                      |
+| 模式           | 用途                                                    |
+| -------------- | ------------------------------------------------------- |
+| **操作區**     | 選取來源／目標格式、貼上請求，並立即查看轉譯後的輸出    |
+| **聊天測試器** | 透過 Proxy 傳送即時聊天訊息，並檢查完整的請求／回應週期 |
+| **測試平台**   | 對多種格式組合執行批次測試，以驗證轉譯的正確性          |
+| **即時監控器** | 在請求流經 Proxy 時查看即時轉譯                         |
 
 **使用情境：**
 
-- 偵錯特定用戶端/提供者組合為何失敗
-- 驗證思考標籤、工具呼叫和系統提示是否正確轉換
-- 比較 OpenAI、Claude、Gemini 和 Responses API 格式之間的差異
+- 偵錯特定用戶端／提供者組合失敗的原因
+- 驗證思考標籤、工具呼叫及系統提示是否正確轉譯
+- 比較 OpenAI、Claude、Gemini 與 Responses API 格式之間的差異
 
 ---
 
 ### 路由策略
 
-透過**控制台 → 設定 → 路由**配置。控制台顯示六種最常用的策略；組合和自動路由器內部支援更廣泛的範圍。
+透過 **Dashboard → Settings → Routing** 設定。儀表板提供六種最常用的策略；組合與自動路由器在內部支援更廣泛的策略集合。
 
-**控制台可見策略（帳戶層級路由）：**
+**儀表板中可見的策略（帳戶層級路由）：**
 
-| 策略                  | 說明                                                                     |
-| --------------------- | ------------------------------------------------------------------------ |
-| **填滿優先**          | 按優先順序使用帳戶 — 主要帳戶處理所有請求，直到無法使用為止              |
-| **循環輪詢**          | 在所有帳戶之間循環，附帶可配置的黏性限制（預設每個帳戶 3 次呼叫）        |
-| **P2C（雙隨機選擇）** | 選取 2 個隨機帳戶，路由到健康狀態較佳的那個 — 在負載與健康感知間取得平衡 |
-| **隨機**              | 使用 Fisher-Yates 洗牌法隨機為每個請求選取帳戶                           |
-| **最少使用**          | 路由到 `lastUsedAt` 時間戳記最舊的帳戶，平均分配流量                     |
-| **成本最佳化**        | 路由到優先級值最低的帳戶，以最低成本提供者為最佳化目標                   |
+| 策略                      | 說明                                                                         |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| **優先填滿**              | 依優先順序使用帳戶 — 主要帳戶會處理所有請求，直到無法使用為止                |
+| **輪詢**                  | 在所有帳戶間循環，並使用可設定的黏著上限（預設：每個帳戶 3 次呼叫）          |
+| **P2C（兩個選擇的力量）** | 隨機挑選 2 個帳戶，並將請求路由至狀況較健康者 — 在考量健康狀態的同時平衡負載 |
+| **隨機**                  | 使用 Fisher-Yates 洗牌，為每個請求隨機選取一個帳戶                           |
+| **最少使用**              | 將請求路由至 `lastUsedAt` 時間戳記最早的帳戶，以平均分配流量                 |
+| **成本最佳化**            | 將請求路由至優先值最低的帳戶，針對最低成本的提供者進行最佳化                 |
 
-**進階組合和自動策略**（可依組合配置，或透過 `auto/*` 前綴使用 — 參閱 [AUTO-COMBO.md](../routing/AUTO-COMBO.md)）：
+**進階組合與自動策略**（可針對每個組合設定，或透過 `auto/*` 前綴設定 — 請參閱 [AUTO-COMBO.md](../routing/AUTO-COMBO.md)）：
 
-- `priority` — 嚴格順序，不進行循環輪詢
-- `weighted` — 依各模型權重按比例分配流量
-- `fill-first` — 耗盡第一個模型直到達到限制
+- `priority` — 嚴格依序，絕不輪詢
+- `weighted` — 依每個模型的權重按比例分配流量
+- `fill-first` — 優先用盡第一個模型，直到達到限制
 - `round-robin` / `strict-random` / `random`
-- `p2c`（雙隨機選擇）
-- `least-used` 和 `cost-optimized`
-- `auto` — 跨所有候選者的評分驅動路由
-- `lkgp`（Last Known Good Provider）— 鎖定每個工作階段最後成功的模型
-- `context-optimized` — 選取可用上下文視窗最大的模型
-- `context-relay` — 串聯長上下文模型以處理後續回合
+- `p2c`（兩個選擇的力量）
+- `least-used` 與 `cost-optimized`
+- `auto` — 依分數在所有候選項目中選擇
+- `lkgp`（最後已知可用的提供者）— 固定使用上次成功的提供者，之後再依規則進行後援
+- `context-optimized` — 選擇可用上下文視窗最大的模型
+- `context-relay` — 串接長上下文模型以處理後續輪次
 
-#### 外部黏性工作階段標頭
+#### 外部黏著工作階段標頭
 
-用於外部工作階段親和性（例如，反向代理後方的 Claude Code/Codex 代理），請發送：
+如需外部工作階段親和性（例如位於反向 Proxy 後方的 Claude Code/Codex 代理程式），請傳送：
 
 ```http
 X-Session-Id: your-session-key
 ```
 
-OmniRoute 也接受 `x_session_id`，並在 `X-OmniRoute-Session-Id` 中回傳有效的會話金鑰。
+OmniRoute 也接受 `x_session_id`，並在 `X-OmniRoute-Session-Id` 中傳回實際使用的工作階段金鑰。
 
-如果您使用 Nginx 並發送底線格式的標頭，請啟用：
+若使用 Nginx 並傳送底線形式的標頭，請啟用：
 
 ```nginx
 underscores_in_headers on;
@@ -797,18 +830,18 @@ underscores_in_headers on;
 
 #### 萬用字元模型別名
 
-建立萬用字元模式來重新對應模型名稱：
+建立萬用字元模式以重新對應模型名稱：
 
 ```
 模式：claude-sonnet-*     →  目標：cc/claude-sonnet-4-6
 模式：gpt-*               →  目標：gh/gpt-5.3-codex
 ```
 
-萬用字元支援 `*`（任意字元）和 `?`（單一字元）。
+萬用字元支援 `*`（任意字元）與 `?`（單一字元）。
 
-#### 備援鏈
+#### 後援鏈
 
-定義套用至所有請求的全域備援鏈：
+定義套用至所有請求的全域後援鏈：
 
 ```
 鏈：production-fallback
@@ -821,50 +854,49 @@ underscores_in_headers on;
 
 ### 韌性與斷路器
 
-透過**控制台 → 設定 → 韌性**配置。
+透過 **Dashboard → Settings → Resilience** 設定。
 
-OmniRoute 提供五個元件的提供者層級韌性：
+OmniRoute 透過五個元件實作提供者層級的韌性：
 
-1. **請求佇列與節流** — 系統層級的請求塑形：
-   - **每分鐘請求數（RPM）** — 每個帳戶每分鐘的最大請求數
-   - **請求間最小間隔** — 請求之間的最小間隔（毫秒）
-   - **最大並發請求數** — 每個帳戶的最大同時請求數
+1. **請求佇列與速率控制** — 系統層級的請求流量調節：
+   - **每分鐘請求數（RPM）** — 每個帳戶每分鐘可處理的請求上限
+   - **請求間最短時間** — 請求之間以毫秒計算的最短間隔
+   - **並行請求上限** — 每個帳戶可同時處理的請求上限
+2. **連線冷卻** — 針對單一連線在發生可重試失敗後，依驗證類型進行設定：
+   - **基礎冷卻時間** — 可重試上游失敗的預設冷卻時間範圍
+   - **使用上游重試提示** — 若有提供具權威性的 `Retry-After` 或重設提示，則予以遵循
+   - **最大退避步數** — 重複失敗時的最大指數退避層級
 
-2. **連線冷卻** — 在可重試失敗後，依驗證類型為單一連線配置：
-   - **基礎冷卻** — 可重試上游失敗的預設冷卻視窗
-   - **使用上游重試提示** — 在有提供時，遵循權威性的 `Retry-After` 或重置提示
-   - **最大退避步數** — 重複失敗的最大指數退避層級
+3. **提供者斷路器** — 追蹤提供者的端對端失敗，在達到設定的警告閾值時將提供者標記為降級，並在達到設定的失敗閾值時開啟斷路器：
+   - **降級閾值** — 進入 `DEGRADED` 前的提供者連續失敗次數
+   - **失敗閾值** — 進入 `OPEN` 前的提供者連續失敗次數
+   - **重設逾時** — 再次測試提供者之前的等待時間
+   - **CLOSED**（健康）— 請求正常流通
+   - **DEGRADED** — 在追蹤升高的失敗率期間，請求仍會繼續流通
+   - **OPEN** — 重複失敗後暫時封鎖提供者
+   - **HALF_OPEN** — 測試提供者是否已恢復
 
-3. **提供者斷路器** — 追蹤端到端的提供者失敗，在達到配置的警告門檻時將提供者標記為降級，並在達到配置的失敗門檻時開啟斷路器：
-   - **降級門檻** — 進入 `DEGRADED` 狀態前的連續提供者失敗次數
-   - **失敗門檻** — 進入 `OPEN` 狀態前的連續提供者失敗次數
-   - **重置超時** — 再次測試提供者前的時間視窗
-   - **CLOSED（健康）** — 請求正常流動
-   - **DEGRADED（降級）** — 請求仍可流動，但同時追蹤升高的失敗率
-   - **OPEN（開啟）** — 重複失敗後暫時阻擋提供者
-   - **HALF_OPEN（半開）** — 測試提供者是否已恢復
+   連線範圍的 `429` 速率限制會保留在**連線冷卻**中，不會計入提供者斷路器。
 
-   連線層級的 `429` 速率限制會留在**連線冷卻**中，不計入提供者斷路器。
+   提供者斷路器的執行階段狀態僅顯示於**儀表板 → 健康狀態**。
 
-   提供者斷路器的執行時期狀態僅顯示於**控制台 → 健康狀態**。
+4. **等待冷卻** — 如果所有候選連線都已處於冷卻狀態，OmniRoute 可等待最早結束的冷卻時間，並自動重試相同的用戶端請求。
 
-4. **等待冷卻** — 如果所有候選連線都處於冷卻狀態，OmniRoute 可以等待最早的冷卻結束，並自動重試相同的用戶端請求。
+5. **自動偵測速率限制** — 啟用此設定後，當上游提供者回傳明確的等待時間範圍時，這些提示會覆寫本機連線冷卻時間。
 
-5. **速率限制自動偵測** — 當上游提供者回傳明確的等待視窗時，這些提示會在啟用設定時覆蓋本機連線冷卻。
-
-**小撇步：** 使用**健康狀態**頁面來檢查並在故障後重設即時提供者斷路器。韌性頁面僅變更配置。
+**專業提示：** 提供者發生中斷後，可使用**健康狀態**頁面檢查及重設即時提供者斷路器。恢復能力頁面只會變更設定。
 
 ---
 
-### 資料庫匯出 / 匯入
+### 資料庫匯出／匯入
 
-在**控制台 → 設定 → 系統與儲存**中管理資料庫備份。
+在**儀表板 → 設定 → 系統與儲存空間**中管理資料庫備份。
 
-| 動作                    | 說明                                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------- |
-| **匯出資料庫**          | 將目前的 SQLite 資料庫下載為 `.sqlite` 檔案                                                             |
-| **全部匯出（.tar.gz）** | 下載完整的備份封存檔，包含：資料庫、設定、組合、提供者連線（不含憑證）、API 金鑰中繼資料                |
-| **匯入資料庫**          | 上傳 `.sqlite` 檔案以取代目前的資料庫。除非 `DISABLE_SQLITE_AUTO_BACKUP=true`，否則會自動建立匯入前備份 |
+| 動作                   | 說明                                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **匯出資料庫**         | 將目前的 SQLite 資料庫下載為 `.sqlite` 檔案                                                                   |
+| **全部匯出 (.tar.gz)** | 下載完整備份封存檔，其中包含：資料庫、設定、組合、提供者連線（不含認證資料）、API 金鑰中繼資料                |
+| **匯入資料庫**         | 上傳 `.sqlite` 檔案以取代目前的資料庫。除非 `DISABLE_SQLITE_AUTO_BACKUP=true`，否則系統會在匯入前自動建立備份 |
 
 ```bash
 # API：匯出資料庫
@@ -878,45 +910,45 @@ curl -X POST http://localhost:20128/api/db-backups/import \
   -F "file=@backup.sqlite"
 ```
 
-**匯入驗證：** 匯入的檔案會進行完整性檢查（SQLite pragma 檢查）、必要表格檢查（`provider_connections`, `provider_nodes`, `combos`, `api_keys`）以及大小檢查（最大 100MB）。
+**匯入驗證：** 系統會驗證匯入檔案的完整性（SQLite pragma 檢查）、必要資料表（`provider_connections`、`provider_nodes`、`combos`、`api_keys`）及大小（最大 100MB）。
 
 **使用情境：**
 
-- 在機器間遷移 OmniRoute
-- 建立外部備份以進行災難復原
-- 在團隊成員之間分享配置（全部匯出 → 分享封存檔）
+- 在不同機器之間移轉 OmniRoute
+- 建立外部備份以供災難復原
+- 在團隊成員之間共用設定（全部匯出 → 共用封存檔）
 
 ---
 
-### 設定控制台
+### 設定儀表板
 
-設定頁面分為 **7 個標籤**，方便導覽：
+設定頁面分為 **7 個分頁**，方便瀏覽：
 
-| 標籤       | 內容                                                                                                         |
-| ---------- | ------------------------------------------------------------------------------------------------------------ |
-| **一般**   | 系統儲存工具、預設行為、端點隧道可見性                                                                       |
-| **外觀**   | 主題控制（淺色/深色/系統）、側邊欄可見性、Cloudflare/Tailscale/ngrok 隧道卡片的開關                          |
-| **AI**     | 思考預算配置、全域系統提示注入、提示快取統計                                                                 |
-| **安全性** | 登入/密碼設定、IP 存取控制、`/models` 的 API 驗證、提供者封鎖、提示注入防護                                  |
-| **路由**   | 全域路由策略（填滿優先 / 循環輪詢 / P2C / 隨機 / 最少使用 / 成本最佳化）、萬用字元模型別名、備援鏈、組合預設 |
-| **韌性**   | 請求佇列、連線冷卻、提供者斷路器配置、以及等待冷卻行為                                                       |
-| **進階**   | 全域代理配置（HTTP/SOCKS5）、各提供者代理覆蓋設定                                                            |
+| 分頁         | 內容                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **一般**     | 系統儲存工具、預設行為、端點通道可見性                                                                                               |
+| **外觀**     | 主題控制（淺色／深色／系統）、側邊欄可見性、Cloudflare／Tailscale／ngrok 通道卡片的面板切換                                          |
+| **AI**       | 思考預算（直接傳遞／自動移除／自訂／自適應 — 請參閱 [THINKING_BUDGET.md](./THINKING_BUDGET.md)）、全域系統提示詞、提示詞快取統計資料 |
+| **安全性**   | 登入／密碼設定、IP 存取控制、`/models` 的 API 驗證、提供者封鎖、提示詞注入防護                                                       |
+| **路由**     | 全域路由策略（優先填滿／輪詢／P2C／隨機／最少使用／成本最佳化）、萬用字元模型別名、後援鏈、組合預設值                                |
+| **恢復能力** | 請求佇列、連線冷卻、提供者斷路器設定，以及等待冷卻行為                                                                               |
+| **進階**     | 全域代理伺服器設定（HTTP/SOCKS5）、各提供者的代理伺服器覆寫                                                                          |
 
-一般標籤不再重複顯示唯讀的日誌和快取說明。資料庫保留和
-最佳化設定透過 `/api/settings/database` 持續保存；手動清除快取使用
-`DELETE /api/cache`。請求和代理日誌行數上限由
+「一般」不再重複顯示唯讀的記錄與快取附註。資料庫保留與
+最佳化設定會透過 `/api/settings/database` 持久化；手動清除快取則使用
+`DELETE /api/cache`。請求與代理伺服器記錄的資料列上限由
 `CALL_LOGS_TABLE_MAX_ROWS` 和 `PROXY_LOGS_TABLE_MAX_ROWS` 控制。
 
 ---
 
-### 費用與預算管理
+### 成本與預算管理
 
-透過**控制台 → 費用**存取。
+透過**儀表板 → 成本**存取。
 
-| 標籤     | 用途                                                        |
-| -------- | ----------------------------------------------------------- |
-| **預算** | 為每個 API 金鑰設定每日/每週/每月的支出限制，並提供即時追蹤 |
-| **定價** | 檢視和編輯模型定價條目 — 各提供者的每千輸入/輸出權杖費用    |
+| 分頁     | 用途                                                          |
+| -------- | ------------------------------------------------------------- |
+| **預算** | 為每個 API 金鑰設定每日／每週／每月支出上限，並進行即時追蹤   |
+| **定價** | 檢視及編輯模型定價項目 — 各提供者每 1K 個輸入／輸出權杖的成本 |
 
 ```bash
 # API：設定預算
@@ -924,43 +956,46 @@ curl -X POST http://localhost:20128/api/usage/budget \
   -H "Content-Type: application/json" \
   -d '{"keyId": "key-123", "limit": 50.00, "period": "monthly"}'
 
-# API：取得目前預算狀態
+# API：取得目前的預算狀態
 curl http://localhost:20128/api/usage/budget
 ```
 
-**費用追蹤：** 每個請求都會記錄權杖使用量，並使用定價表計算費用。在**控制台 → 用量**中依提供者、模型和 API 金鑰檢視明細。
+**成本追蹤：** 每個請求都會記錄權杖用量，並使用定價表計算成本。可在 **Dashboard → Usage** 中依提供者、模型和 API 金鑰檢視明細。
 
 ---
 
 ### 音訊轉錄
 
-OmniRoute 透過 OpenAI 相容端點支援音訊轉錄：
+OmniRoute 透過與 OpenAI 相容的端點支援音訊轉錄：
 
 ```bash
 POST /v1/audio/transcriptions
-Authorization: Bearer ***
+Authorization: Bearer your-api-key
 Content-Type: multipart/form-data
 
-# 使用 curl 的範例
+# curl 範例
 curl -X POST http://localhost:20128/v1/audio/transcriptions \
-  -H "Authorization: Bearer ***" \
+  -H "Authorization: Bearer your-api-key" \
   -F "file=@audio.mp3" \
-  -F "model=deepgram/nova-3"
+  -F "model=openai/whisper-1"
 ```
 
-**語音轉文字（轉錄）** 提供者：
+`deepgram/nova-3` 是原生 Deepgram 路由，需要 Deepgram API 金鑰。
+如果只設定了 OpenRouter，請使用 `openrouter/deepgram/nova-3`。
 
-- `openai/`（whisper 相容）
+**語音轉文字（轉錄）**提供者：
+
+- `openai/`（相容 whisper）
 - `groq/`（Groq Whisper Turbo）
 - `deepgram/`（Nova 系列）
 - `assemblyai/`
-- `nvidia/`（Parakeet, Canary）
+- `nvidia/`（Parakeet、Canary）
 - `huggingface/`（whisper 變體）
 - `qwen/`
 
-**文字轉語音（`POST /v1/audio/speech`）** 提供者：
+**文字轉語音（`POST /v1/audio/speech`）**提供者：
 
-- `openai/`（tts-1, tts-1-hd）
+- `openai/`（tts-1、tts-1-hd）
 - `hyperbolic/`
 - `deepgram/`（Aura）
 - `nvidia/`（Magpie TTS）
@@ -972,55 +1007,56 @@ curl -X POST http://localhost:20128/v1/audio/transcriptions \
 - `kie/`
 - `aws-polly/`
 - `xiaomi-mimo/`
-- `coqui/`, `tortoise/`
+- `coqui/`、`tortoise/`
 - `qwen/`
 
-支援的轉錄音訊格式：`mp3`, `wav`, `m4a`, `flac`, `ogg`, `webm`。TTS 輸出格式取決於提供者（mp3, wav, opus, pcm, mulaw）。
+支援轉錄的音訊格式：`mp3`、`wav`、`m4a`、`flac`、`ogg`、`webm`。TTS 輸出格式取決於提供者（mp3、wav、opus、pcm、mulaw）。
 
 ---
 
 ### 組合平衡策略
 
-在**控制台 → 組合 → 建立/編輯 → 策略**中配置每個組合的平衡策略。
+在 **Dashboard → Combos → Create/Edit → Strategy** 中設定各組合的平衡策略。
 
-| 策略           | 說明                                     |
-| -------------- | ---------------------------------------- |
-| **循環輪詢**   | 依序輪換模型                             |
-| **優先級**     | 始終嘗試第一個模型；僅在出錯時才進行備援 |
-| **隨機**       | 為每個請求從組合中隨機選取一個模型       |
-| **加權**       | 根據每個模型的指定權重按比例路由         |
-| **最少使用**   | 路由到近期請求最少的模型（使用組合指標） |
-| **成本最佳化** | 路由到最便宜的可用模型（使用定價表）     |
+| 策略           | 說明                                           |
+| -------------- | ---------------------------------------------- |
+| **輪詢**       | 依序輪替使用模型                               |
+| **優先順序**   | 一律先嘗試第一個模型；僅在發生錯誤時才容錯移轉 |
+| **隨機**       | 每個請求都從組合中隨機選取一個模型             |
+| **加權**       | 根據為各模型指派的權重按比例路由               |
+| **最少使用**   | 路由至近期請求數最少的模型（使用組合指標）     |
+| **成本最佳化** | 路由至最便宜的可用模型（使用定價表）           |
 
-全域組合預設可在**控制台 → 設定 → 路由 → 組合預設**中設定。
-組合目標超時預設會繼承當前請求的超時設定。僅在需要更短的
-單目標限制以觸發更快的備援時，才使用組合預設或個別組合上的**目標超時（秒）**。
+可在 **Dashboard → Settings → Routing → Combo Defaults** 中設定全域組合預設值。
+組合目標逾時預設會繼承目前的請求逾時。只有在需要以較短的個別目標限制觸發更快的容錯移轉時，才應在組合預設值或個別組合中使用 **Target timeout
+(seconds)**。
 
-零延遲組合最佳化為選擇性功能。請保持**零延遲最佳化**停用，以
-防止這些延遲功能搶跑備援目標、根據 TTFT 歷史記錄跳過目標，或壓縮備援請求；啟用此選項會允許配置的避險策略、預測性 TTFT
-跳過，以及主動式備援壓縮，以路由/請求正確性換取更低的尾端
+零延遲組合最佳化功能必須選擇啟用。保持停用 **Zero-latency optimizations**，以防止這些延遲功能競逐容錯移轉目標、根據 TTFT
+歷史記錄略過目標，或壓縮容錯移轉請求；啟用後，則可允許已設定的避險、預測性 TTFT
+略過和主動式容錯移轉壓縮，以犧牲路由／請求保真度來降低尾端
 延遲。
 
-當上游提供者要求嚴格的 `max_tokens` / `maxOutputTokens` 限制時，請停用**推理權杖緩衝區**。啟用時，組合路由僅在模型有已知輸出上限時為推理模型增加
-緩衝空間，若安全的緩衝值超過該上限，則保留用戶端權杖限制不變。如果用戶端限制已高於已知上限，
-OmniRoute 會在發送上游請求前將其限制在該上限內。
+當上游提供者要求嚴格的
+`max_tokens` / `maxOutputTokens` 限制時，請停用 **Reasoning token buffer**。啟用後，組合路由只會為具有已知輸出上限的推理模型
+增加餘裕；如果安全的緩衝值會超過該上限，則會維持用戶端權杖限制不變。如果用戶端限制已高於已知上限，
+OmniRoute 會先將其限制在該上限，再傳送上游請求。
 
 ---
 
-### 健康狀態控制台
+### 健康狀態儀表板
 
-透過**控制台 → 健康狀態**存取。即時系統健康狀態總覽，包含 6 張卡片：
+可透過 **Dashboard → Health** 存取。即時系統健康狀態總覽包含 6 張卡片：
 
-| 卡片               | 顯示內容                               |
-| ------------------ | -------------------------------------- |
-| **系統狀態**       | 運作時間、版本、記憶體使用量、資料目錄 |
-| **提供者健康狀態** | 全域提供者斷路器執行時期狀態           |
-| **速率限制**       | 各帳戶的活躍連線冷卻狀態及剩餘時間     |
-| **活躍鎖定**       | 活躍的模型層級鎖定和暫時排除           |
-| **簽章快取**       | 去重複快取統計（活躍金鑰數、命中率）   |
-| **延遲遙測**       | 各提供者的 p50/p95/p99 延遲匯總        |
+| 卡片               | 顯示內容                                 |
+| ------------------ | ---------------------------------------- |
+| **系統狀態**       | 運作時間、版本、記憶體用量、資料目錄     |
+| **提供者健康狀態** | 全域提供者斷路器的執行階段狀態           |
+| **速率限制**       | 各帳戶的作用中連線冷卻狀態及剩餘時間     |
+| **作用中鎖定**     | 作用中的模型範圍鎖定與暫時排除項目       |
+| **簽章快取**       | 去重複快取統計資料（作用中金鑰、命中率） |
+| **延遲遙測**       | 各提供者的 p50/p95/p99 延遲彙總          |
 
-**小撇步：** 健康狀態頁面每 10 秒自動重新整理。使用斷路器卡片來識別哪些提供者正在發生問題。
+**專業提示：** Health 頁面每 10 秒自動重新整理。使用斷路器卡片來識別哪些提供者正遭遇問題。
 
 ---
 

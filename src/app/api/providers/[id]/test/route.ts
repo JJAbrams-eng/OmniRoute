@@ -49,6 +49,8 @@ export { classifyFailure, projectProviderRuntimeForPublicResponse } from "./publ
 const OAUTH_TEST_TIMEOUT_MS = 30_000;
 
 import { CLI_RUNTIME_PROVIDER_MAP } from "./cliRuntimeProviderMap";
+import { isOperatorDisabled } from "@/lib/providers/operatorDisable";
+import { getRequestPeerLocality } from "@/shared/utils/apiAuth";
 
 /** POST body is optional; when present, only known fields are validated. */
 const providerConnectionTestBodySchema = z.object({
@@ -68,7 +70,17 @@ function hasQoderToken(connection: any): boolean {
   return false;
 }
 
-async function getProviderRuntimeStatus(connection: any) {
+// GHSA-jmq6-8j86-8xqj: getCliRuntimeStatus() spawns on the host (LOCAL_ONLY capability),
+// but these routes stay remote-reachable — only loopback/LAN callers and the scheduler probe.
+export type ConnectionTestOptions = { allowLocalRuntimeProbe?: boolean };
+
+export async function getProviderRuntimeStatus(
+  connection: any,
+  {
+    allowLocalRuntimeProbe = true,
+    probe = getCliRuntimeStatus,
+  }: ConnectionTestOptions & { probe?: typeof getCliRuntimeStatus } = {}
+) {
   const provider = typeof connection?.provider === "string" ? connection.provider : "";
   let toolId = CLI_RUNTIME_PROVIDER_MAP[provider];
 
@@ -95,9 +107,10 @@ async function getProviderRuntimeStatus(connection: any) {
     toolId = null;
   }
   if (!toolId) return null;
+  if (!allowLocalRuntimeProbe) return null;
 
   try {
-    const runtime = await getCliRuntimeStatus(toolId);
+    const runtime = await probe(toolId);
     if (runtime.installed && runtime.runnable) {
       return runtime;
     }
@@ -237,6 +250,16 @@ function isTokenExpired(connection: any) {
   }
   const buffer = 5 * 60 * 1000; // 5 minutes
   return expiresAt <= Date.now() + buffer;
+}
+
+// #12958: GitLab's own `direct_access` 403 JSON body (e.g. `{"error":"insufficient_scope"}`)
+// is safe operator-facing diagnostic text — it is not a stack trace and does not echo the
+// token — but is capped and stripped of control characters defensively before it reaches
+// the stored/surfaced error message, per docs/security/ERROR_SANITIZATION.md.
+function sanitizeUpstreamBodyText(bodyText: string): string {
+  const collapsed = bodyText.replace(/[\r\n\t\u0000-\u001f]+/g, " ").trim();
+  const MAX_LENGTH = 300;
+  return collapsed.length > MAX_LENGTH ? `${collapsed.slice(0, MAX_LENGTH)}…` : collapsed;
 }
 
 /**
@@ -644,9 +667,14 @@ export async function testOAuthConnection(
       };
     }
 
+    // #12958: `res.text()` can only be read once — capture it here in the outer
+    // function scope so the generic bodyText selection below (which used to call
+    // `res.text()` a second time and silently get "" back, discarding the real
+    // GitLab error) can reuse the same string instead of re-reading a drained body.
+    let gitlabDuoDirectAccessBodyText: string | null = null;
     if (connection.provider === "gitlab-duo") {
-      const gitlabText = await res.text();
-      if (shouldFallbackToPublicCodeSuggestions(res.status, gitlabText)) {
+      gitlabDuoDirectAccessBodyText = await res.text();
+      if (shouldFallbackToPublicCodeSuggestions(res.status, gitlabDuoDirectAccessBodyText)) {
         const fallbackOk = await probeGitLabDuoPublicFallback(connection, accessToken, timeoutMs);
         if (fallbackOk) {
           return {
@@ -788,14 +816,47 @@ export async function testOAuthConnection(
     // revoked token. (The body is unread here for non-gitlab providers; the guard keeps
     // it safe if it was already consumed.) antigravity/agy read any failure body so a
     // geo-blocked egress location is labeled with an actionable message instead of a
-    // generic "API returned 400".
+    // generic "API returned 400". gitlab-duo already consumed the body above (`res.text()`
+    // is single-read) — reuse it instead of re-reading a drained stream (#12958).
     const bodyText =
-      res.status === 401 ||
-      res.status === 403 ||
-      connection.provider === "antigravity" ||
-      connection.provider === "agy"
-        ? await res.text().catch(() => "")
-        : "";
+      connection.provider === "gitlab-duo"
+        ? (gitlabDuoDirectAccessBodyText ?? "")
+        : res.status === 401 ||
+            res.status === 403 ||
+            connection.provider === "antigravity" ||
+            connection.provider === "agy"
+          ? await res.text().catch(() => "")
+          : "";
+
+    if (connection.provider === "antigravity" || connection.provider === "agy") {
+      console.log(
+        `[OAuthTest] ${connection.provider} probe returned HTTP ${res.status}:`,
+        bodyText.slice(0, 500)
+      );
+    }
+
+    // #13010: a Cloud Code envelope failure answers with its own JSON `error.message`.
+    // Appending it turns a useless "API returned 400" into the actual upstream reason.
+    // Collapsed/truncated by the same helper the gitlab-duo path uses.
+    let upstreamDetail = "";
+    if (bodyText) {
+      try {
+        const parsed = JSON.parse(bodyText);
+        if (typeof parsed?.error?.message === "string" && parsed.error.message.trim()) {
+          upstreamDetail = `: ${sanitizeUpstreamBodyText(parsed.error.message)}`;
+        }
+      } catch {}
+    }
+
+    // #12958: surface the real upstream body for a gitlab-duo 403 that also fails the
+    // public-fallback probe, instead of a generic "Access denied" — the operator needs
+    // to tell an entitlement/scope failure apart from an instance-config or revoked-token
+    // one. Trimmed/truncated per docs/security/ERROR_SANITIZATION.md (no stack traces are
+    // involved; this is GitLab's own JSON error body, capped defensively).
+    const gitlabDuoAccessDeniedMessage =
+      connection.provider === "gitlab-duo" && res.status === 403
+        ? `Access denied: ${sanitizeUpstreamBodyText(bodyText)}`
+        : "Access denied";
     const error = isGeoBlockedError(bodyText)
       ? "Egress location blocked by Google (User location is not supported). The Cloud Code API is not offered from this server's proxy exit region — route antigravity/agy through a proxy in a supported region (e.g. US/EU) or use a different provider. This is NOT an account problem."
       : isAccountDeactivatedMessage(bodyText)
@@ -803,8 +864,8 @@ export async function testOAuthConnection(
         : res.status === 401
           ? "Token invalid or revoked"
           : res.status === 403
-            ? "Access denied"
-            : `API returned ${res.status}`;
+            ? gitlabDuoAccessDeniedMessage
+            : `API returned ${res.status}${upstreamDetail}`;
 
     return {
       valid: false,
@@ -876,7 +937,11 @@ async function testApiKeyConnection(connection: any) {
  * @param {string} validationModelId Optional custom model ID to test connection with
  * @returns {Promise<object>} Test result (same shape as the JSON response)
  */
-export async function testSingleConnection(connectionId: string, validationModelId?: string) {
+export async function testSingleConnection(
+  connectionId: string,
+  validationModelId?: string,
+  options: ConnectionTestOptions = {}
+) {
   const connection = await getCachedProviderConnectionById(connectionId);
 
   if (!connection) {
@@ -922,7 +987,7 @@ export async function testSingleConnection(connectionId: string, validationModel
 
   let result;
   const startTime = Date.now();
-  const runtime = await getProviderRuntimeStatus(connection);
+  const runtime = await getProviderRuntimeStatus(connection, options);
 
   // Codex app-server connections carry no validatable OpenAI token (the codex
   // app-server process self-manages its own OAuth). Probe the app-server's
@@ -987,9 +1052,9 @@ export async function testSingleConnection(connectionId: string, validationModel
   // connection that can never be health-checked would otherwise stay hidden
   // from /v1/models forever under the "only advertise tested connections"
   // default (isActive starts false on creation — see POST /api/providers),
-  // silently regressing every provider without a test surface.
+  // silently regressing every provider without a test surface. Operator-disabled stays off.
   if (result.skipped === true) {
-    if (connection.isActive !== true) {
+    if (connection.isActive !== true && !isOperatorDisabled(connection)) {
       try {
         await updateProviderConnection(connectionId, { isActive: true });
       } catch (activateError) {
@@ -1049,8 +1114,8 @@ export async function testSingleConnection(connectionId: string, validationModel
     // failing test intentionally leaves isActive untouched (a transient
     // failure on an already-active, already-working connection must not take
     // it out of rotation — that's what the cooldown/rateLimitedUntil below is
-    // for), so this never deactivates anything.
-    ...(result.valid ? { isActive: true } : {}),
+    // for), so this never deactivates anything, nor re-enables an operator-disabled one.
+    ...(result.valid && !isOperatorDisabled(connection) ? { isActive: true } : {}),
     lastError: clearErrorState ? null : result.valid ? connection.lastError : result.error,
     lastErrorAt: clearErrorState ? null : result.valid ? connection.lastErrorAt : now,
     lastTested: now,
@@ -1167,7 +1232,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     }
     const { validationModelId } = validation.data;
 
-    const data = await testSingleConnection(id, validationModelId);
+    const data = await testSingleConnection(id, validationModelId, {
+      allowLocalRuntimeProbe: getRequestPeerLocality(request) !== "remote",
+    });
 
     if (data.error === "Connection not found") {
       return NextResponse.json({ error: "Connection not found" }, { status: 404 });
