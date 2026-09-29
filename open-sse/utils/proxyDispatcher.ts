@@ -65,7 +65,7 @@ type ProxyConfigObject = {
   family?: string;
 };
 
-function getDispatcherOptions(hostname?: string) {
+export function getDispatcherOptions(hostname?: string) {
   const timeouts = getUpstreamTimeoutConfig(process.env, (message) => {
     console.warn(`[ProxyDispatcher] ${message}`);
   });

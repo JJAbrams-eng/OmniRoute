@@ -111,7 +111,7 @@ import {
 import { applyPeerTraceHeader } from "@/shared/resilience/peerRouting";
 import { applyClineProtocolHeaders } from "@/shared/utils/clineAuth";
 import { isProbeContext } from "@/shared/utils/probeOrigin";
-import { assertDispatchUrlAllowed, dispatchPinned } from "./dispatchPin.ts";
+import { assertDispatchUrlAllowed, dispatchGuarded } from "./dispatchPin.ts";
 // Header helpers extracted to a pure leaf; re-exported for external importers
 // (executors + tests) that import them from "./base.ts".
 export {
@@ -679,12 +679,17 @@ export class BaseExecutor {
     }
 
     try {
-      const response = await dispatchPinned(this.provider, url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(requestBody),
-        signal: activeSignal || undefined,
-      });
+      const response = await dispatchGuarded(
+        this.provider,
+        url,
+        {
+          method: "POST",
+          headers,
+          body: JSON.stringify(requestBody),
+          signal: activeSignal || undefined,
+        },
+        credentials
+      );
 
       const text = await response.text();
       if (!response.ok) {
@@ -956,7 +961,12 @@ export class BaseExecutor {
             : requestOptions;
 
           try {
-            return await dispatchPinned(this.provider, requestUrl, optionsWithSignal);
+            return await dispatchGuarded(
+              this.provider,
+              requestUrl,
+              optionsWithSignal,
+              requestCredentials
+            );
           } finally {
             if (timeoutId) clearTimeout(timeoutId);
           }

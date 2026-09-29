@@ -51,14 +51,15 @@ export async function resolveHostnameAddresses(
 }
 
 /**
- * Build an undici dispatcher bound to a single already-DNS-validated address, ignoring whatever
- * the hostname resolves to at connect time. Exposed separately from {@link createPinnedFetch} so
- * a caller that must keep going through the patched global `fetch` (proxy routing, provider
- * request logging, test stubs) can hand the pin over as `init.dispatcher` instead of replacing
- * the fetch function.
+ * Build a `fetch` bound to a single already-DNS-validated address, ignoring
+ * whatever the hostname resolves to at connect time. Exported for direct
+ * testing: this is the mechanism that closes the DNS-rebinding TOCTOU gap
+ * (GHSA-cmhj-wh2f-9cgx) — a second, real DNS lookup at connect time could
+ * otherwise return a different (possibly private) address than the one
+ * validated up-front.
  */
-export function createPinnedDispatcher(address: string, family: number): Agent {
-  return new Agent({
+export function createPinnedFetch(address: string, family: number): typeof fetch {
+  const dispatcher = new Agent({
     connect: {
       // Node's `net.connect`/`tls.connect` invoke a custom `lookup` in one of
       // two incompatible shapes depending on `options.all`: modern Node
@@ -80,18 +81,6 @@ export function createPinnedDispatcher(address: string, family: number): Agent {
       },
     },
   });
-}
-
-/**
- * Build a `fetch` bound to a single already-DNS-validated address, ignoring
- * whatever the hostname resolves to at connect time. Exported for direct
- * testing: this is the mechanism that closes the DNS-rebinding TOCTOU gap
- * (GHSA-cmhj-wh2f-9cgx) — a second, real DNS lookup at connect time could
- * otherwise return a different (possibly private) address than the one
- * validated up-front.
- */
-export function createPinnedFetch(address: string, family: number): typeof fetch {
-  const dispatcher = createPinnedDispatcher(address, family);
   return (async (input, init) => {
     try {
       return (await undiciFetch(input as string | URL, {
