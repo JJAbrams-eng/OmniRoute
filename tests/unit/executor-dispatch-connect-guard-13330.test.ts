@@ -295,3 +295,49 @@ test("REAL fetch: an operator host resolving to an allowed address connects thro
     dnsStub.restore();
   }
 });
+
+// --- BaseExecutor.execute wiring ------------------------------------------------------------
+// The release tip routes execute()'s transport through `validationFetch()` (strict-validation
+// fence). #13330 plugs `dispatchGuarded` in as that fence's transport, so both must hold at once.
+
+test("execute(): strict-validation fence runs AND the operator URL rides the guarded dispatcher", async () => {
+  const { BaseExecutor } = await import("../../open-sse/executors/base.ts");
+  const executor = new BaseExecutor("openai", {
+    baseUrl: "https://api.openai.com/v1/chat/completions",
+  });
+  const real = globalThis.fetch;
+  const seen: Array<{ dispatcher: unknown; redirect: unknown }> = [];
+  globalThis.fetch = (async (
+    _url: unknown,
+    init?: { dispatcher?: unknown; redirect?: unknown }
+  ) => {
+    seen.push({ dispatcher: init?.dispatcher, redirect: init?.redirect });
+    return Response.json({ choices: [{ message: { content: "ok" } }] });
+  }) as typeof fetch;
+  let fenceCalls = 0;
+  try {
+    await withEnv({}, async () => {
+      await executor.execute({
+        model: "gpt-4o-mini",
+        body: { model: "gpt-4o-mini", messages: [{ role: "user", content: "hi" }] },
+        stream: false,
+        credentials: { apiKey: "sk-test", ...OPERATOR },
+        skipUpstreamRetry: true,
+        validationDispatch: {
+          beforeFetch() {
+            fenceCalls++;
+          },
+          reject(): never {
+            throw new Error("strict dispatch rejected");
+          },
+        },
+      });
+    });
+  } finally {
+    globalThis.fetch = real;
+  }
+  assert.equal(fenceCalls, 1, "the strict-validation fence observed the dispatch");
+  assert.equal(seen.length, 1);
+  assert.equal(seen[0].redirect, "error", "the fence's redirect lock reached the transport");
+  assert.ok(seen[0].dispatcher, "the guarded dispatcher rode on the global fetch");
+});
