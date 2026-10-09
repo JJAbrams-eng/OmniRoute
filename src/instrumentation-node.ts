@@ -378,8 +378,8 @@ export async function registerNodejs(): Promise<void> {
   await ensureSecrets();
   await Promise.all([
     import("@/lib/env/runtimeEnv").then(({ enforceWebRuntimeEnv }) => enforceWebRuntimeEnv()),
-    // Fail loudly at boot if STORAGE_ENCRYPTION_KEY is missing in production
-    // instead of silently persisting provider credentials as plaintext.
+    // Warn loudly at boot if STORAGE_ENCRYPTION_KEY is missing in production.
+    // Do not exit: an empty key is the documented encryption-disabled contract.
     import("@/lib/db/encryption").then(({ assertEncryptionKeyConfiguredForProduction }) =>
       assertEncryptionKeyConfiguredForProduction()
     ),

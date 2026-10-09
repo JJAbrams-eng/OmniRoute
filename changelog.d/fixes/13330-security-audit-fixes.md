@@ -5,9 +5,9 @@
   on the highest-risk override path; it rides on the ambient patched `fetch` as a dispatcher and is
   skipped whenever an outbound proxy, TLS impersonation or the direct sentinel applies, so
   configured proxies and request logging are never bypassed. The rate limiter no longer fails fully open when Redis errors — it falls
-  back to the in-memory limiter instead of allowing every request unconditionally. Boot now fails
-  fast in production when `STORAGE_ENCRYPTION_KEY` is missing instead of silently persisting
-  credentials in plaintext with only a warning, and the persisted `JWT_SECRET`/`API_KEY_SECRET`
+  back to the in-memory limiter instead of allowing every request unconditionally. Boot warns
+  loudly in production when `STORAGE_ENCRYPTION_KEY` is missing and keeps serving: an empty key is
+  the documented encryption-disabled contract, so production must not exit. Persisted `JWT_SECRET`/`API_KEY_SECRET`
   are encrypted at rest. And the MCP scope-enforcement gap is closed:
   `withScopeEnforcement()` now forces scope checks for any caller resolved from a real HTTP
   `Authorization` header that does not already hold `manage`/`admin` scope, even when
